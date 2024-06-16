@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,24 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="./script.js" defer></script>
 </head>
+
 <body>
-    
+    <nav>
+        <h1 id="title">Lumina</h1>
+        <div>
+            <input type="checkbox" id="unit-toggle" class="toggle">
+            <label for="unit-toggle"><input type="checkbox" id="unit-toggle" class="toggle"></label>
+            <input type="checkbox" id="theme-toggle" class="toggle">
+            <label for="theme-toggle"><input type="checkbox" id="theme-toggle" class="toggle"></label>
+        </div>
+    </nav>
+    <div id="main-container">
+        <main>
+            <section id="current" class="scroll"></section>
+            <section id="current-extended" class="scroll"></section>
+            <section id="forcast" class="scroll"></section>
+        </main>
+    </div>
 </body>
+
 </html>
