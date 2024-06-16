@@ -1,14 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..800&display=swap');
 
 /*root*/
+:root {
+    --shadow-elevation-low:
+        0.5px 0.6px 0.8px hsl(var(--shadow-color) / 0.15),
+        0.8px 1px 1.3px -1.6px hsl(var(--shadow-color) / 0.13),
+        2px 2.5px 3.2px -3.2px hsl(var(--shadow-color) / 0.1);
+    --shadow-elevation-medium:
+        0.5px 0.6px 0.8px hsl(var(--shadow-color) / 0.16),
+        1.4px 1.8px 2.3px -1.1px hsl(var(--shadow-color) / 0.14),
+        3.8px 4.9px 6.3px -2.2px hsl(var(--shadow-color) / 0.12),
+        10px 12.7px 16.4px -3.2px hsl(var(--shadow-color) / 0.1);
+    --shadow-elevation-high:
+        0.5px 0.6px 0.8px hsl(var(--shadow-color) / 0.14),
+        2.3px 2.9px 3.7px -0.5px hsl(var(--shadow-color) / 0.14),
+        4.5px 5.7px 7.4px -0.9px hsl(var(--shadow-color) / 0.13),
+        7.9px 10px 12.9px -1.4px hsl(var(--shadow-color) / 0.12),
+        13.5px 17.1px 22.1px -1.9px hsl(var(--shadow-color) / 0.11),
+        22.1px 28.1px 36.2px -2.3px hsl(var(--shadow-color) / 0.1),
+        34.8px 44.1px 56.9px -2.8px hsl(var(--shadow-color) / 0.09),
+        52.3px 66.3px 85.5px -3.2px hsl(var(--shadow-color) / 0.09);
+}
+
 :root[data-theme="light"] {
     --border-highlight: rgba(0, 0, 0, 0.2);
-    --background: #fbfbfe;
+    --bgr-opacity: 1;
+    --title-bgr0: hsl(255, 83%, 35%);
+    --title-bgr1: hsl(223, 100%, 53%);
 }
 
 :root[data-theme="dark"] {
     --border-highlight: rgba(255, 255, 255, 0.2);
-    --background: #0E1116;
+    --bgr-opacity: 0;
+    --title-bgr0: hsl(255, 83%, 85%);
+    --title-bgr1: hsl(223, 100%, 83%);
 }
 
 /*root/*/
@@ -18,7 +43,25 @@
 body {
     margin: 0;
     padding: 0;
+    height: 100vh;
     font-family: 'Comfortaa', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+p {
+    margin: 0;
+}
+
+body * {
+    transition: color ease-in-out 0.2s, background-color ease-in-out 0.2s;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -moz-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 .hide {
@@ -44,7 +87,7 @@ body {
 }
 
 .scroll::-webkit-scrollbar-track {
-    background-color: color-mix(in lab, var(--background), var(--border-highlight));
+    background-color: red;
     border: solid 5px transparent;
 }
 
@@ -56,7 +99,7 @@ body {
 }
 
 .scroll::-webkit-scrollbar-corner {
-    background: color-mix(in lab, var(--background), var(--border-highlight));
+    background: green;
 }
 
 input[type="checkbox"].toggle+label {
@@ -122,4 +165,110 @@ input[type="checkbox"].toggle:checked+label::after {
 
 #unit-toggle.toggle:checked+label::after {
     background-image: url('https://api.iconify.design/mdi:temperature-fahrenheit.svg?color=%23fffefa');
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+
+    top: 0px;
+    height: 2rem;
+    padding: 0 1.5rem;
+    width: calc(100% - 3rem);
+
+    background: linear-gradient(to top left, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+    border-bottom: 2pt solid var(--border-highlight);
+    z-index: 999;
+}
+
+nav>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: fit-content;
+    width: 7rem;
+}
+
+#title {
+    font-weight: 500;
+    background: linear-gradient(30deg, var(--title-bgr0), var(--title-bgr1));
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#main-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    background: linear-gradient(to top right, #dba9ef, #a7c0ff);
+    opacity: var(--bgr-opacity);
+    transition: opacity 0.2s ease-in-out;
+}
+
+#main-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background: linear-gradient(to top right, #14063d, #120752);
+    opacity: calc(1 - var(--bgr-opacity));
+    transition: opacity 0.2s ease-in-out;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 80%;
+    transform: translateY(1rem);
+    padding: 0.2rem;
+    border-radius: 1rem;
+    background: linear-gradient(to top left, rgba(102, 51, 153, 0.3), rgba(102, 51, 153, 0.2));
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+}
+
+section {
+    position: relative;
+    height: 100%;
+    width: 33%;
+}
+
+section:nth-child(1):after,
+section:nth-child(2):after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: 0;
+    height: 90%;
+    width: 2pt;
+    border-radius: 0.1rem;
+    background-color: var(--border-highlight);
 }
