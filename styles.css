@@ -83,23 +83,40 @@ body * {
 }
 
 .scroll::-webkit-scrollbar {
-    width: 10px;
+    width: 3pt;
 }
 
 .scroll::-webkit-scrollbar-track {
-    background-color: red;
-    border: solid 5px transparent;
+    background-color: transparent;
 }
 
 .scroll::-webkit-scrollbar-thumb {
-    background-color: blue;
+    background-color: var(--border-highlight);
     border-radius: 50px;
     background-clip: content-box;
-    border: solid 1pt transparent;
 }
 
 .scroll::-webkit-scrollbar-corner {
-    background: green;
+    background: transparent;
+}
+
+.scroll::-moz-scrollbar {
+    width: 4pt;
+}
+
+.scroll::-moz-scrollbar-track {
+    background-color: transparent;
+}
+
+.scroll::-moz-scrollbar-thumb {
+    background-color: var(--border-highlight);
+    border-radius: 50px;
+    background-clip: content-box;
+    height: 60px;
+}
+
+.scroll::-moz-scrollbar-corner {
+    background: transparent;
 }
 
 input[type="checkbox"].toggle+label {
@@ -242,9 +259,10 @@ nav>div {
 }
 
 main {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 70%;
     height: 80%;
     transform: translateY(1rem);
@@ -255,20 +273,29 @@ main {
     -webkit-backdrop-filter: blur(1rem);
 }
 
-section {
-    position: relative;
-    height: 100%;
-    width: 33%;
-}
-
-section:nth-child(1):after,
-section:nth-child(2):after {
+main:before,
+main:after {
     content: '';
     position: absolute;
     top: 5%;
-    right: 0;
+    left: 33%;
     height: 90%;
     width: 2pt;
     border-radius: 0.1rem;
     background-color: var(--border-highlight);
+    pointer-events: none;
+}
+
+main:after {
+    left: 66%;
+}
+
+section {
+    height: 100%;
+    width: 30%;
+}
+
+section>div {
+    height: 100%;
+    width: 100%;
 }

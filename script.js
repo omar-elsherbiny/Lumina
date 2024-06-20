@@ -54,3 +54,8 @@ async function getWeather(location) {
         return null;
     }
 }
+
+const current = document.getElementById('current');
+current.addEventListener('scroll', e => {
+    // document.getElementById('night-info').scrollIntoView({behavior: "auto", block: "end", inline: "nearest"});
+});
