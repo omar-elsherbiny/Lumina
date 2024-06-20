@@ -1,6 +1,8 @@
 const KEY = 'baac031bcdaa4ae8b7b05039241606'; // :<
 const root = document.querySelector(':root');
 const infoContainer = document.getElementById('info-container');
+const searchInput = document.getElementById('search-input');
+const autocompleteBox = document.getElementById('autocomplete-box');
 
 async function getWeather(location) {
     try {
@@ -15,6 +17,7 @@ async function getWeather(location) {
 
 async function searchLocation(query) {
     try {
+        if (query.length == 0) return [];
         const response = await fetch(`http://api.weatherapi.com/v1/search.json?key=${KEY}&q=${query}`);
         const data = await response.json();
         let result = [];
@@ -24,7 +27,7 @@ async function searchLocation(query) {
         return result;
     } catch (error) {
         console.error(error);
-        return null;
+        return [];
     }
 }
 // API handling
@@ -95,3 +98,30 @@ function updateInfoContainer() {
 updateInfoContainer();
 infoContainer.addEventListener('scroll', updateInfoContainer);
 // scroll animation
+
+let weatherData;
+async function updateWeatherData(searchIndex) {
+    if (searches.length == 0) return;
+    weatherData = await getWeather(searches[searchIndex]);
+    console.log(weatherData);
+    autocompleteBox.innerHTML = '';
+    searches = [];
+}
+
+let searches = [];
+async function updateAutocomplete(e) {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        updateWeatherData(0);
+    } else {
+        searches = await searchLocation(searchInput.value.trim());
+        autocompleteBox.innerHTML = '';
+        searches.forEach(search_res => {
+            let element = document.createElement('h5');
+            element.innerHTML = search_res;
+            autocompleteBox.appendChild(element);
+        });
+    }
+}
+
+searchInput.addEventListener('keyup', e => updateAutocomplete(e));
+// search box 

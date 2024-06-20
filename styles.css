@@ -295,7 +295,7 @@ main:after {
     content: '';
     position: absolute;
     top: 5%;
-    left: 33%;
+    left: 32%;
     height: 90%;
     width: 2pt;
     border-radius: 0.1rem;
@@ -304,7 +304,7 @@ main:after {
 }
 
 main:after {
-    left: 66%;
+    left: 67%;
 }
 
 section {
@@ -372,6 +372,15 @@ section {
 #search-input,
 #date-time-box {
     font-family: 'Josefin Sans';
+}
+
+#search-icon {
+    cursor: pointer;
+    transition: scale 0.2s ease-in-out;
+}
+
+#search-icon:hover {
+    scale: 1.1;
 }
 
 #date-time-box h3 {
