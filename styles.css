@@ -21,28 +21,34 @@
         34.8px 44.1px 56.9px -2.8px hsl(var(--shadow-color) / 0.09),
         52.3px 66.3px 85.5px -3.2px hsl(var(--shadow-color) / 0.09);
 
-    --bgr-light: hsl(283, 72%, 85%), #bdcfff;
+    --bgr-light: #e5bdf4, #9cb6ff;
     --bgr-dark: #14063d, #120752;
-    --main-trans: rgba(102, 51, 153, 0.3), rgba(102, 51, 153, 0.2);
-    --night-info: #14063d, #120752;
-    --autocomplete: hsla(214, 54%, 63%, 0.75);
-    --autocomplete-card: hsl(235, 74%, 53%);
+    --main-trans: #6633994d, #66339933;
+    --day-info-opacity: 100%;
+    --day-info0: #070c5080;
+    --day-info1: #0b430580;
+    --autocomplete: #6e9ad4bf;
+    --autocomplete-card: #2e3de0;
 }
 
 :root[data-theme="light"] {
     --border-highlight: rgba(0, 0, 0, 0.2);
     --bgr-opacity: 1;
-    --title-bgr0: hsl(255, 83%, 35%);
-    --title-bgr1: hsl(223, 100%, 53%);
+    --title-bgr0: #340fa3;
+    --title-bgr1: #0f53ff;
     --text: #1a1a1a;
+    --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0e042a66), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #12075033);
+    --night-info-glow: color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0e042a4d);
 }
 
 :root[data-theme="dark"] {
     --border-highlight: rgba(255, 255, 255, 0.2);
     --bgr-opacity: 0;
-    --title-bgr0: hsl(255, 83%, 85%);
-    --title-bgr1: hsl(223, 100%, 83%);
+    --title-bgr0: #c9b9f8;
+    --title-bgr1: #a8c1ff;
     --text: #e5e5e5;
+    --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0e042a80), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #1207504d);
+    --night-info-glow: color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0e042a80);
 }
 
 /*root/*/
@@ -307,8 +313,22 @@ section {
 
 /*current container*/
 #current-container {
+    position: relative;
     display: flex;
     flex-direction: column;
+    border-radius: 1rem;
+}
+
+#current-container::before {
+    content: '';
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    width: calc(100% + 0.25rem);
+    height: calc(100% + 0.25rem);
+    border-radius: 1rem;
+    background: linear-gradient(-20deg, var(--night-info));
+    box-shadow: 0px 0px 10px 5px var(--night-info-glow);
 }
 
 #search-container {
@@ -341,7 +361,8 @@ section {
     backdrop-filter: blur(5rem);
     -webkit-backdrop-filter: blur(5rem);
 
-    transition: height 5s ease-in-out; /*???*/
+    transition: height 5s ease-in-out;
+    /*???*/
 }
 
 #autocomplete-box h5 {

@@ -1,5 +1,6 @@
 const KEY = 'baac031bcdaa4ae8b7b05039241606'; // :<
-const currentInfo = document.getElementById('current-info');
+const root = document.querySelector(':root');
+const infoContainer = document.getElementById('info-container');
 
 async function getWeather(location) {
     try {
@@ -86,10 +87,11 @@ function lerp(a, b, t, capped = true) {
     return ((1 - t) * a + t * b).toFixed(1);
 }
 
-function updateCurrentInfo() {
-    let t = getScrollPercentage(currentInfo);
+function updateInfoContainer() {
+    let t = getScrollPercentage(infoContainer);
+    root.style.setProperty('--day-info-opacity',lerp(100,0,t)+'%');
 }
 
-updateCurrentInfo();
-currentInfo.addEventListener('scroll', updateCurrentInfo);
+updateInfoContainer();
+infoContainer.addEventListener('scroll', updateInfoContainer);
 // scroll animation
