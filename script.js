@@ -1,6 +1,33 @@
 const KEY = 'baac031bcdaa4ae8b7b05039241606'; // :<
 const currentInfo = document.getElementById('current-info');
 
+async function getWeather(location) {
+    try {
+        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${KEY}&&q=${location}&days=3&aqi=no&alerts=no`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+async function searchLocation(query) {
+    try {
+        const response = await fetch(`http://api.weatherapi.com/v1/search.json?key=${KEY}&q=${query}`);
+        const data = await response.json();
+        let result = [];
+        data.forEach(datum => {
+            result.push(`${datum.name}, ${datum.region}, ${datum.country}`)
+        });
+        return result;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+// API handling
+
 let themeToggle = document.getElementById('theme-toggle');
 let storedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 if (storedTheme) {
@@ -45,17 +72,6 @@ unitToggle.addEventListener('click', function () {
 });
 // unit switch
 
-async function getWeather(location) {
-    try {
-        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${KEY}&&q=${location}&days=3&aqi=no&alerts=no`);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
 function getScrollPercentage(element) {
     const { scrollHeight, clientHeight, scrollTop } = element;
     const scrolledPortion = scrollHeight - clientHeight - scrollTop;
@@ -72,9 +88,6 @@ function lerp(a, b, t, capped = true) {
 
 function updateCurrentInfo() {
     let t = getScrollPercentage(currentInfo);
-    currentInfo.style.backgroundColor = `color-mix(in lab, red ${lerp(0, 100, t)}%, blue)`;
-    document.getElementById('day').style.color = `rgba(0,0,0,${lerp(1, 0, 2 * t)})`;
-    document.getElementById('night').style.color = `rgba(0,0,0,${lerp(0, 1, 2 * t)})`;
 }
 
 updateCurrentInfo();
