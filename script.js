@@ -18,7 +18,7 @@ async function getWeather(location) {
 async function searchLocation(query) {
     try {
         if (query.length == 0) return [];
-        const response = await fetch(`http://api.weatherapi.com/v1/search.json?key=${KEY}&q=${query}`);
+        const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=${KEY}&q=${query}`);
         const data = await response.json();
         let result = [];
         data.forEach(datum => {
