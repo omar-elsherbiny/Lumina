@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 /*root*/
 :root {
@@ -25,8 +26,8 @@
     --bgr-dark: #14063d, #120752;
     --main-trans: #6633994d, #66339933;
     --day-info-opacity: 100%;
-    --day-info0: #070c5080;
-    --day-info1: #0b430580;
+    --day-info0: #35deed80;
+    --day-info1: #1ff20780;
     --autocomplete: #6e9ad4bf;
     --autocomplete-card: #2e3de0;
 }
@@ -345,6 +346,37 @@ section {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+}
+
+#search-input {
+    background: transparent;
+    outline: none;
+    border: none;
+    font-weight: 800;
+    font-size: 12.2pt;
+    width: calc(100% - 28px);
+    color: var(--text);
+}
+
+#search-input:-webkit-autofill,
+#search-input:-webkit-autofill:hover,
+#search-input:-webkit-autofill:focus,
+#search-input:-webkit-autofill:active {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+#search-input::placeholder {
+    color: inherit;
+}
+
+#search-input,
+#date-time-box {
+    font-family: 'Josefin Sans';
+}
+
+#date-time-box h3 {
+    font-weight: 500;
+    font-size: 12pt;
 }
 
 #search-container>#autocomplete-box {

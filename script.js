@@ -89,7 +89,7 @@ function lerp(a, b, t, capped = true) {
 
 function updateInfoContainer() {
     let t = getScrollPercentage(infoContainer);
-    root.style.setProperty('--day-info-opacity',lerp(100,0,t)+'%');
+    root.style.setProperty('--day-info-opacity', lerp(100, 0, t) + '%');
 }
 
 updateInfoContainer();
