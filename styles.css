@@ -3,6 +3,7 @@
 
 /*root*/
 :root {
+    --shadow-color: 0deg 0% 0%;
     --shadow-elevation-low:
         0.5px 0.6px 0.8px hsl(var(--shadow-color) / 0.15),
         0.8px 1px 1.3px -1.6px hsl(var(--shadow-color) / 0.13),
@@ -365,6 +366,9 @@ section {
     transition: background-color 600000s 0s, color 600000s 0s;
 }
 
+#search-input::-moz-placeholder {
+    color: inherit;
+}
 #search-input::placeholder {
     color: inherit;
 }
@@ -401,6 +405,7 @@ section {
     background-color: var(--autocomplete);
     backdrop-filter: blur(5rem);
     -webkit-backdrop-filter: blur(5rem);
+    box-shadow: var(--shadow-elevation-low);
 
     transition: height 5s ease-in-out;
     /*???*/
@@ -413,6 +418,7 @@ section {
     background-color: var(--autocomplete-card);
     text-align: center;
     font-weight: 400;
+    box-shadow: var(--shadow-elevation-low);
 }
 
 #info-container {
