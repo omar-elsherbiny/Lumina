@@ -25,7 +25,8 @@
     --bgr-dark: #14063d, #120752;
     --main-trans: rgba(102, 51, 153, 0.3), rgba(102, 51, 153, 0.2);
     --night-info: #14063d, #120752;
-    --autocomplete: rgba(102, 51, 153, 0.8);
+    --autocomplete: hsla(214, 54%, 63%, 0.75);
+    --autocomplete-card: hsl(235, 74%, 53%);
 }
 
 :root[data-theme="light"] {
@@ -311,6 +312,7 @@ section {
 }
 
 #search-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -322,16 +324,41 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 97%;
+    width: 100%;
+}
+
+#search-container>#autocomplete-box {
+    position: absolute;
+    top: calc(100% + 0.1rem);
+    left: -3pt;
+    height: fit-content;
+    align-items: start;
+    justify-content: start;
+    flex-wrap: wrap;
+    z-index: 2;
+    border-radius: 1rem;
+    background-color: var(--autocomplete);
+    backdrop-filter: blur(5rem);
+    -webkit-backdrop-filter: blur(5rem);
+
+    transition: height 5s ease-in-out; /*???*/
+}
+
+#autocomplete-box h5 {
+    border-radius: 1rem;
+    padding: 0.2rem 0.3rem;
+    margin: 0.3rem;
+    background-color: var(--autocomplete-card);
+    text-align: center;
+    font-weight: 400;
 }
 
 #info-container {
     position: relative;
     bottom: 0.2rem;
     padding-top: 0.25rem;
-    mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 0.5rem, rgba(0,0,0,1) calc(100% - 1rem), rgba(0,0,0,0) 100%);
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 0.5rem, rgba(0,0,0,1) calc(100% - 1rem), rgba(0,0,0,0) 100%);
-    
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.5rem, rgba(0, 0, 0, 1) calc(100% - 1rem), rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.5rem, rgba(0, 0, 0, 1) calc(100% - 1rem), rgba(0, 0, 0, 0) 100%);
 }
 
 /*current container/*/
