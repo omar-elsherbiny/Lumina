@@ -31,6 +31,9 @@
     --day-info1: #1ff20780;
     --autocomplete: #6e9ad4bf;
     --autocomplete-card: #2e3de0;
+    --bar-daylight: #f4b240;
+    --bar-moonlight: #041547;
+    --bar-darknight: #1e1e1e;
 }
 
 :root[data-theme="light"] {
@@ -469,6 +472,7 @@ footer {
     scale: 1.02;
 }
 
+/*info container*/
 #info-container {
     position: relative;
     bottom: 0.2rem;
@@ -477,4 +481,63 @@ footer {
     -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.5rem, rgba(0, 0, 0, 1) calc(100% - 1rem), rgba(0, 0, 0, 0) 100%);
 }
 
+#centered-current-info,
+#centered-night-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+#extended-current-info,
+#extended-night-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 0.2rem 0 2rem 0;
+}
+
+#centered-current-info h3,
+#centered-night-info h3 {
+    padding: 0.1rem 0;
+    text-align: center;
+}
+
+.info-piece {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: clamp(8rem, 70%, 100%);
+    padding: 0.1rem 0;
+}
+
+.key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#centered-night-info {
+    padding-bottom: 40%;
+}
+
+#extended-night-info {
+    padding-bottom: 20%;
+}
+
+#current-weather-icon,
+#night-moon-icon {
+    width: 64px;
+    height: 64px;
+}
+
+.daycycle-bar {
+    width: 80%;
+    height: 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(to right, var(--bar-daylight) 0%, var(--bar-moonlight) 20%, var(--bar-darknight) 90%, #f4b240 100%);
+}
+
+/*info container/*/
 /*current container/*/
