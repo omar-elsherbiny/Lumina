@@ -40,6 +40,7 @@
     --bar-sunset: 0%;
     --bar-moonrise: 0%;
     --bar-moonset: 0%;
+    --text3: #e6e6e6;
 }
 
 :root[data-theme="light"] {
@@ -464,10 +465,11 @@ footer {
 
 #autocomplete-box h5 {
     border-radius: 1rem;
-    padding: 0.2rem 0.3rem;
+    padding: 0.2rem 0.4rem;
     margin: 0.3rem;
     background-color: var(--autocomplete-card);
     text-align: center;
+    color: var(--text3);
     font-weight: 490;
     box-shadow: var(--shadow-elevation-low);
     cursor: pointer;
@@ -501,7 +503,7 @@ footer {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    padding: 0.2rem 0 2rem 0;
+    padding: 0.5rem 0 2rem 0;
 }
 
 #centered-current-info h3,
@@ -514,22 +516,20 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     width: clamp(8rem, 70%, 100%);
-    padding: 0.1rem 0;
+    padding: 0.15rem 0;
 }
 
 .key {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-right: 0.8rem;
 }
-
-#centered-night-info {
-    padding-bottom: 40%;
-}
-
-#extended-night-info {
-    padding-bottom: 20%;
+.key-icon {
+    color: var(--text3);
+    padding-right: 0.8rem;
 }
 
 #current-weather-icon,
@@ -544,6 +544,7 @@ footer {
     height: 1rem;
     border-radius: 1rem;
     background: var(--bar-darknight);
+    margin-top: 0.8rem;
 }
 
 .daycycle-bar::before,

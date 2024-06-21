@@ -108,6 +108,7 @@ async function applyNewWeatherData(location) {
 function confirmAutocomplete(searchIndex) {
     if (searches.length == 0) return;
     applyNewWeatherData(searches[searchIndex]);
+    document.activeElement.blur();
     searchInput.value = searches[searchIndex];
     prev_query = searches[searchIndex];
     autocompleteBox.style.opacity = '0';
@@ -116,12 +117,10 @@ function confirmAutocomplete(searchIndex) {
         clearTimeout(timeout);
     }, 200);
     searches = [];
-    document.activeElement.blur();
 }
 
 let searches = [];
 async function updateAutocomplete(e) {
-    prev_query = searchInput.value;
     if (e.key === 'Enter' || e.keyCode === 13) {
         confirmAutocomplete(0);
     } else {
@@ -138,15 +137,14 @@ async function updateAutocomplete(e) {
 }
 
 searchInput.addEventListener('keyup', e => updateAutocomplete(e));
-let prev_query;
+let prev_query = '';
 searchInput.addEventListener('focus', e => {
-    prev_query = searchInput.value;
     searchInput.value = '';
     autocompleteBox.style.opacity = '0';
 });
 searchInput.addEventListener('focusout', e => {
     searchInput.value = prev_query;
-    autocompleteBox.style.opacity = '1';
+    autocompleteBox.style.opacity = '0';
 });
 // search box 
 
