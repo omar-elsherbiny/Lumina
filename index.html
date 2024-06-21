@@ -46,7 +46,9 @@
                                 <p>Friday</p>
                                 <p>Saturday</p>
                             </div>
-                            <p><pre> </pre></p>
+                            <p>
+                            <pre> </pre>
+                            </p>
                             <div class="digit">
                                 <p class="current">-</p>
                                 <p>0</p>
@@ -214,29 +216,113 @@
                     </div>
                 </div>
                 <div id="info-container" class="scroll">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Voluptatem similique quas veritatis
-                    enim illum nemo quidem ipsa officia deleniti<br> fugiat<br> doloribus ratione inventore praesentium
-                    <br>consequatur corporis? Cupiditate consectetur <br>voluptatibus corrupti!Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. <br>Voluptatem similique quas veritatis enim illum nemo quidem
-                    ipsa officia deleniti<br> fugiat<br> doloribus ratione inventore praesentium <br>consequatur
-                    corporis? Cupiditate consectetur <br>voluptatibus corrupti!Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. <br>Voluptatem similique quas veritatis enim illum nemo quidem ipsa officia
-                    deleniti<br> fugiat<br> doloribus ratione inventore praesentium <br>consequatur corporis? Cupiditate
-                    consectetur <br>voluptatibus corrupti!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Voluptatem similique quas veritatis
-                    enim illum nemo quidem ipsa officia deleniti<br> fugiat<br> doloribus ratione inventore praesentium
-                    <br>consequatur corporis? Cupiditate consectetur <br>voluptatibus corrupti!Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. <br>Voluptatem similique quas veritatis enim illum nemo quidem
-                    ipsa officia deleniti<br> fugiat<br> doloribus ratione inventore praesentium <br>consequatur
-                    corporis? Cupiditate consectetur <br>voluptatibus corrupti!Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. <br>Voluptatem similique quas veritatis enim illum nemo quidem ipsa officia
-                    deleniti<br> fugiat<br> doloribus ratione inventore praesentium <br>consequatur corporis? Cupiditate
-                    consectetur <br>voluptatibus corrupti!
+                    <div id="centered-current-info">
+                        <div id="current-weather-icon">
+                            <img src="https://cdn.weatherapi.com/weather/64x64/day/116.png">
+                        </div>
+                        <h3 id="current-temp">30°C</h3>
+                        <h3 id="current-desc">Sunny</h3>
+                    </div>
+                    <div id="extended-current-info">
+                        <div class="info-piece">
+                            <div class="key">
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"
+                                        d="M14.155 13.86a.326.326 0 0 1-.114-.116a.312.312 0 0 1-.041-.155v-8.66c0-.512-.21-1.002-.586-1.364A2.038 2.038 0 0 0 12 3c-.53 0-1.04.203-1.414.565A1.894 1.894 0 0 0 10 4.929v8.66a.313.313 0 0 1-.041.155a.327.327 0 0 1-.114.116a3.971 3.971 0 0 0-1.396 1.493a3.803 3.803 0 0 0-.445 1.965a3.8 3.8 0 0 0 1.266 2.644a4.085 4.085 0 0 0 2.82 1.037a4.071 4.071 0 0 0 2.77-1.16A3.787 3.787 0 0 0 16 17.145c0-.652-.168-1.294-.49-1.867a3.976 3.976 0 0 0-1.355-1.417" />
+                                </svg>
+                                <h5 class="key-name">Feels like:</h5>
+                            </div>
+                            <h5 class="value">28°C</h5>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1.5"
+                                        d="M12.495 3c3.58 3.56 9.345 7.602 6.932 13.397C18.275 19.163 15.492 21 12.5 21c-2.992 0-5.775-1.837-6.927-4.603C3.161 10.607 8.919 6.561 12.495 3" />
+                                </svg>
+                                <h5 class="key-name">Humidity:</h5>
+                            </div>
+                            <h5 class="value">60%</h5>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="4" />
+                                        <path
+                                            d="M12 3v2m0 14.004v2M5 12H3m18 0h-2m0-7l-2 2M5 5l2 2m0 10l-2 2m14 0l-2-2" />
+                                    </g>
+                                </svg>
+                                <h5 class="key-name">UV:</h5>
+                            </div>
+                            <h5 class="value">9</h5>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1.5"
+                                        d="M18.325 7c3.485 0 3.485 5 0 5H3m15.411 9c3.452 0 3.452-5 0-5H3m7.872-13c3.506 0 3.506 5 0 5H3" />
+                                </svg>
+                                <h5 class="key-name">Wind:</h5>
+                            </div>
+                            <h5 class="value">14 km/h</h5>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1.5"
+                                        d="M20.278 17.497c3.678-3.154-.214-7.384-4.256-7.384C13.175-.969-3.526 8.197 3.875 16.55" />
+                                </svg>
+                                <h5 class="key-name">Clouds:</h5>
+                            </div>
+                            <h5 class="value">0%</h5>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1.5"
+                                        d="M12.004 19L12 14m4.004 7L16 16m-7.996 1L8 12m11.825 5c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                                </svg>
+                                <h5 class="key-name">Rain Probability:</h5>
+                            </div>
+                            <h5 class="value">30%</h5>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1.5"
+                                        d="M12.004 17.5L12 17m4.004-1.5L16 15m-7.996.5L8 15m4.004 6L12 20.5m4.004-1.5L16 18.5m-7.996.5L8 18.5M19.825 17c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                                </svg>
+                                <h5 class="key-name">Snow Probability:</h5>
+                            </div>
+                            <h5 class="value">0%</h5>
+                        </div>
+                    </div>
+                    <div id="centered-night-info"></div>
+                    <div id="extended-night-info"></div>
                 </div>
             </section>
             <section id="forcast-container" class="scroll">
             </section>
         </main>
+        <footer>
+            <a href="https://www.weatherapi.com/" title="Free Weather API" target="_blank"><img width="60"
+                    src='//cdn.weatherapi.com/v4/images/weatherapi_logo.png' alt="Weather data by WeatherAPI.com"></a>
+        </footer>
     </div>
 </body>
 

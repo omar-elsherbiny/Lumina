@@ -171,14 +171,4 @@ function setClock(digits, arr) {
         }
     });
 }
-setInterval(() => {
-    setTimeout(() => {
-        setClock(document.querySelectorAll('#date .digit'), ['Friday', ' ', 1, 0, 6, 2, 0, 2, 4]);
-        setClock(document.querySelectorAll('#time .digit'), [' ', 1, 5, 1]);
-    }, 1000)
-    setTimeout(() => {
-        setClock(document.querySelectorAll('#date .digit'), ['Wednesday', 9, 9, 0, 0, 9, 9, 0, 0]);
-        setClock(document.querySelectorAll('#time .digit'), [2, 4, 0, 0]);
-    }, 2000)
-}, 4000);
 // clock digits

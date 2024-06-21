@@ -296,6 +296,12 @@ section {
     width: 32%;
 }
 
+footer {
+    position: absolute;
+    left: 0.5rem;
+    bottom: 0.5rem;
+}
+
 /*clock digits*/
 .clock-digit-container {
     display: flex;
