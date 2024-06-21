@@ -24,8 +24,7 @@
         52.3px 66.3px 85.5px -3.2px hsl(var(--shadow-color) / 0.09);
 
     --bgr-light: #e5bdf4, #9cb6ff;
-    --bgr-dark: #14063d, #120752;
-    --main-trans: #4625834d, #3b82b133;
+    --bgr-dark: #24063d, #15085e;
     --main-trans: #6633994d, #66339933;
     --day-info-opacity: 100%;
     --day-info0: #35deed80;
@@ -583,3 +582,9 @@ footer {
 
 /*info container/*/
 /*current container/*/
+
+@media screen and (max-width:1090px) {
+    .info-piece {
+        justify-content: space-around;
+    }
+}
