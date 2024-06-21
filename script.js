@@ -100,11 +100,16 @@ infoContainer.addEventListener('scroll', updateInfoContainer);
 // scroll animation
 
 let weatherData;
-async function updateWeatherData(searchIndex) {
-    if (searches.length == 0) return;
-    weatherData = await getWeather(searches[searchIndex]);
-    searchInput.value = searches[searchIndex];
+async function applyNewWeatherData(location) {
+    weatherData = await getWeather(location);
     console.log(weatherData);
+}
+
+function confirmAutocomplete(searchIndex) {
+    if (searches.length == 0) return;
+    applyNewWeatherData(searches[searchIndex]);
+    searchInput.value = searches[searchIndex];
+    prev_query = searches[searchIndex];
     autocompleteBox.style.opacity = '0';
     let timeout = setTimeout(() => {
         autocompleteBox.innerHTML = '';
@@ -118,14 +123,14 @@ let searches = [];
 async function updateAutocomplete(e) {
     prev_query = searchInput.value;
     if (e.key === 'Enter' || e.keyCode === 13) {
-        updateWeatherData(0);
+        confirmAutocomplete(0);
     } else {
         searches = await searchLocation(searchInput.value.trim());
         autocompleteBox.innerHTML = '';
         searches.forEach((search_res, search_ind) => {
             let element = document.createElement('h5');
             element.innerHTML = search_res;
-            element.onclick = () => { updateWeatherData(search_ind) };
+            element.onclick = () => { confirmAutocomplete(search_ind) };
             autocompleteBox.appendChild(element);
         });
     }
