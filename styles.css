@@ -532,6 +532,21 @@ footer {
     padding-right: 0.8rem;
 }
 
+.value.clock-digit-container p {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.value.clock-digit-container .digit {
+    height: 1.5rem;
+}
+
+#extended-night-info .value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #current-weather-icon,
 #night-moon-icon {
     width: 64px;

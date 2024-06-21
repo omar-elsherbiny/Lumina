@@ -212,8 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="autocomplete-box">
-                    </div>
+                    <div id="autocomplete-box"></div>
                 </div>
                 <div id="info-container" class="scroll">
                     <div id="centered-current-info">
@@ -276,7 +275,66 @@
                                 </svg>
                                 <h5 class="key-name">Feels like:</h5>
                             </div>
-                            <h5 class="value">28°C</h5>
+                            <div id="feels-like" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <p>.</p>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>°C</p>
+                                    <p>°F</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="info-piece">
                             <div class="key">
@@ -288,7 +346,35 @@
                                 </svg>
                                 <h5 class="key-name">Humidity:</h5>
                             </div>
-                            <h5 class="value">60%</h5>
+                            <div id="humidity" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <h5>%</h5>
+                            </div>
                         </div>
                         <div class="info-piece">
                             <div class="key">
@@ -303,7 +389,23 @@
                                 </svg>
                                 <h5 class="key-name">UV:</h5>
                             </div>
-                            <h5 class="value">9</h5>
+                            <div id="uv" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                    <p>10</p>
+                                    <p>11</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="info-piece">
                             <div class="key">
@@ -315,7 +417,49 @@
                                 </svg>
                                 <h5 class="key-name">Wind:</h5>
                             </div>
-                            <h5 class="value">14 km/h</h5>
+                            <div id="wind" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <p>.</p>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <h5>km/h</h5>
+                            </div>
                         </div>
                         <div class="info-piece">
                             <div class="key">
@@ -327,7 +471,35 @@
                                 </svg>
                                 <h5 class="key-name">Clouds:</h5>
                             </div>
-                            <h5 class="value">0%</h5>
+                            <div id="clouds" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <h5>%</h5>
+                            </div>
                         </div>
                         <div class="info-piece">
                             <div class="key">
@@ -339,7 +511,35 @@
                                 </svg>
                                 <h5 class="key-name">Rain Probability:</h5>
                             </div>
-                            <h5 class="value">30%</h5>
+                            <div id="rain" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <h5>%</h5>
+                            </div>
                         </div>
                         <div class="info-piece">
                             <div class="key">
@@ -351,7 +551,35 @@
                                 </svg>
                                 <h5 class="key-name">Snow Probability:</h5>
                             </div>
-                            <h5 class="value">0%</h5>
+                            <div id="snow" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <h5>%</h5>
+                            </div>
                         </div>
                     </div>
                     <div id="centered-night-info">
@@ -360,7 +588,35 @@
                                 src="https://api.iconify.design/wi:moon-alt-waning-crescent-4.svg">
                         </div>
                         <h3 id="moon-desc">Full moon</h3>
-                        <h3 id="moon-lumin">99% Illumination</h3>
+                        <div id="moon-lumin" class="value clock-digit-container">
+                            <div class="digit">
+                                <p class="current">-</p>
+                                <p>0</p>
+                                <p>1</p>
+                                <p>2</p>
+                                <p>3</p>
+                                <p>4</p>
+                                <p>5</p>
+                                <p>6</p>
+                                <p>7</p>
+                                <p>8</p>
+                                <p>9</p>
+                            </div>
+                            <div class="digit">
+                                <p class="current">-</p>
+                                <p>0</p>
+                                <p>1</p>
+                                <p>2</p>
+                                <p>3</p>
+                                <p>4</p>
+                                <p>5</p>
+                                <p>6</p>
+                                <p>7</p>
+                                <p>8</p>
+                                <p>9</p>
+                            </div>
+                            <h3>% Illumination</h3>
+                        </div>
                     </div>
                     <div id="extended-night-info">
                         <div class="info-piece">
@@ -368,7 +624,120 @@
                                 <h5>Sun: </h5>
                             </div>
                             <div class="value">
-                                <h5>03:00->07:00</h5>
+                                <div id="sunrise" class="clock-digit-container">
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <p>:</p>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M16.15 13H5q-.425 0-.712-.288T4 12t.288-.712T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L19.3 11.3q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7z" />
+                                </svg>
+                                <div id="sunset" class="clock-digit-container">
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <p>:</p>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="info-piece">
@@ -376,7 +745,120 @@
                                 <h5>Moon: </h5>
                             </div>
                             <div class="value">
-                                <h5>05:00->12:00</h5>
+                                <div id="moonrise" class="clock-digit-container">
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <p>:</p>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M16.15 13H5q-.425 0-.712-.288T4 12t.288-.712T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L19.3 11.3q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7z" />
+                                </svg>
+                                <div id="moonset" class="clock-digit-container">
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <p>:</p>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                    <div class="digit">
+                                        <p class="current">-</p>
+                                        <p>0</p>
+                                        <p>1</p>
+                                        <p>2</p>
+                                        <p>3</p>
+                                        <p>4</p>
+                                        <p>5</p>
+                                        <p>6</p>
+                                        <p>7</p>
+                                        <p>8</p>
+                                        <p>9</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="daycycle-bar"></div>
