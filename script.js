@@ -149,3 +149,28 @@ searchInput.addEventListener('focusout', e => {
     autocompleteBox.style.opacity = '1';
 });
 // search box 
+
+function setClock(digits, arr) {
+    digits.forEach((digit, dIndex) => {
+        let options = digit.children;
+        let target = arr[dIndex];
+        if (target != null) {
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                option.classList.remove('current');
+                option.classList.remove('out');
+                if (option.innerHTML < target) {
+                    option.classList.add('out');
+                } else if (option.innerHTML == target) {
+                    option.classList.add('current');
+                }
+            }
+        }
+    });
+}
+
+setTimeout(() => {
+    setClock(document.querySelectorAll('#date .digit'), ['Wednesday', 2, 1, 0, 6, 2, 0, 2, 4]);
+    setClock(document.querySelectorAll('#time .digit'), [2, 1, 5, 1, 'a', 'm']);
+}, 1000)
+// clock digits
