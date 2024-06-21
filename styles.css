@@ -39,6 +39,7 @@
     --title-bgr0: #340fa3;
     --title-bgr1: #0f53ff;
     --text: #1a1a1a;
+    --text2: #303030;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0e042a66), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #12075033);
 }
 
@@ -47,7 +48,8 @@
     --bgr-opacity: 0;
     --title-bgr0: #c9b9f8;
     --title-bgr1: #a8c1ff;
-    --text: #e5e5e5;
+    --text: #e6e6e6;
+    --text2: #fcfcfd;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0e042a80), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #1207504d);
 }
 
@@ -280,7 +282,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 70%;
+    width: 80%;
     height: 80%;
     transform: translateY(1rem);
     padding: 0.2rem;
@@ -313,15 +315,15 @@ footer {
 
 .digit {
     position: relative;
-    width: 7.09px;
-    height: 0.8rem;
+    width: 7px;
+    height: 1.2rem;
     overflow: hidden;
     transition: width 0.2s ease-in-out;
 }
 
 .clock-digit-container p {
     background-color: inherit;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
     text-align: center;
 }
@@ -410,6 +412,7 @@ footer {
 
 #search-input,
 #date-time-box {
+    color: var(--text2);
     font-family: 'Josefin Sans';
 }
 
@@ -422,9 +425,13 @@ footer {
     scale: 1.1;
 }
 
-#date-time-box h3 {
+#date-time-box .clock-digit-container p {
     font-weight: 500;
     font-size: 12pt;
+}
+
+#date-time-box .clock-digit-container .digit {
+    height: 12pt;
 }
 
 #search-container>#autocomplete-box {
@@ -465,7 +472,7 @@ footer {
 #info-container {
     position: relative;
     bottom: 0.2rem;
-    padding-top: 0.25rem;
+    padding: 0.25rem 0;
     mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.5rem, rgba(0, 0, 0, 1) calc(100% - 1rem), rgba(0, 0, 0, 0) 100%);
     -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.5rem, rgba(0, 0, 0, 1) calc(100% - 1rem), rgba(0, 0, 0, 0) 100%);
 }
