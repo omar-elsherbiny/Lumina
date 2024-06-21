@@ -196,3 +196,4 @@ function getBarGradient(sunrise, sunset, moonrise, moonset) {
 }
 
 // day cycle bar
+// let b = getBarGradient("06:00 AM", "06:00 PM", "10:00 PM", "7:00 AM");
