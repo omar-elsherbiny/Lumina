@@ -4,6 +4,10 @@ const infoContainer = document.getElementById('info-container');
 const searchInput = document.getElementById('search-input');
 const autocompleteBox = document.getElementById('autocomplete-box');
 
+const currentWeatherIcon = document.querySelector('#current-weather-icon img');
+const currentTemp = document.querySelectorAll('#current-temp .digit');
+const currentDesc = document.getElementById('current-desc');
+
 async function getWeather(location) {
     try {
         const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=3&aqi=no&alerts=no`);
@@ -73,6 +77,10 @@ unitToggle.addEventListener('click', function () {
     }
     document.documentElement.setAttribute('data-unit', targetUnit);
     localStorage.setItem('unit', targetUnit);
+
+    if (wd != null) {
+        setClock(currentTemp, tempToArr(wd.current[`temp_${targetUnit}`], targetUnit));
+    }
 });
 // unit switch
 
@@ -99,10 +107,22 @@ updateInfoContainer();
 infoContainer.addEventListener('scroll', updateInfoContainer);
 // scroll animation
 
-let weatherData;
+let wd = null; // weather data
 async function applyNewWeatherData(location) {
-    weatherData = await getWeather(location);
-    console.log(weatherData);
+    wd = await getWeather(location);
+    let cu = document.documentElement.getAttribute('data-unit'); // current unit
+    console.log(wd);
+    if (wd.current.is_day) {
+        root.style.setProperty('--day-info0', '#35deed80');
+        root.style.setProperty('--day-info1', '#1ff20780');
+    } else {
+        root.style.setProperty('--day-info0', '#070c5080');
+        root.style.setProperty('--day-info1', '#0b430580');
+    }
+
+    currentWeatherIcon.src = 'https:' + wd.current.condition.icon.replace(/64x64/g, "128x128");
+    setClock(currentTemp, tempToArr(wd.current[`temp_${cu}`], cu));
+    currentDesc.innerHTML = wd.current.condition.text;
 }
 
 function confirmAutocomplete(searchIndex) {
@@ -147,6 +167,19 @@ searchInput.addEventListener('focusout', e => {
     autocompleteBox.style.opacity = '0';
 });
 // search box 
+
+function tempToArr(temp, unit) {
+    const parts = temp.toString().split(".");
+    let intStr = parts[0];
+    intStr = intStr.padStart(3, " ");
+    let decStr = "";
+    if (parts.length > 1) {
+        decStr = parts[1].slice(0, 2);
+    }
+    let arr = [...intStr].concat(decStr.split(""));
+    arr.push(unit == 'c' ? '°C' : '°F');
+    return arr;
+}
 
 function setClock(digits, arr) {
     digits.forEach((digit, dIndex) => {
