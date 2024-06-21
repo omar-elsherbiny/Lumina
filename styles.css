@@ -309,7 +309,8 @@ section {
     position: relative;
     width: 7.09px;
     height: 0.8rem;
-    overflow-y: hidden;
+    overflow: hidden;
+    transition: width 0.2s ease-in-out;
 }
 
 .clock-digit-container p {

@@ -154,6 +154,7 @@ function setClock(digits, arr) {
     digits.forEach((digit, dIndex) => {
         let options = digit.children;
         let target = arr[dIndex];
+        let currentNode = null;
         if (target != null) {
             for (let i = 0; i < options.length; i++) {
                 const option = options[i];
@@ -163,14 +164,21 @@ function setClock(digits, arr) {
                     option.classList.add('out');
                 } else if (option.innerHTML == target) {
                     option.classList.add('current');
+                    currentNode = option;
                 }
             }
+            digit.style.width = currentNode == null ? 0 : currentNode.getBoundingClientRect().width + 'px';
         }
     });
 }
-
-setTimeout(() => {
-    setClock(document.querySelectorAll('#date .digit'), ['Wednesday', 2, 1, 0, 6, 2, 0, 2, 4]);
-    setClock(document.querySelectorAll('#time .digit'), [2, 1, 5, 1, 'a', 'm']);
-}, 1000)
+setInterval(() => {
+    setTimeout(() => {
+        setClock(document.querySelectorAll('#date .digit'), ['Friday', ' ', 1, 0, 6, 2, 0, 2, 4]);
+        setClock(document.querySelectorAll('#time .digit'), [' ', 1, 5, 1]);
+    }, 1000)
+    setTimeout(() => {
+        setClock(document.querySelectorAll('#date .digit'), ['Wednesday', 9, 9, 0, 0, 9, 9, 0, 0]);
+        setClock(document.querySelectorAll('#time .digit'), [2, 4, 0, 0]);
+    }, 2000)
+}, 4000);
 // clock digits
