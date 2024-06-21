@@ -330,7 +330,7 @@ section {
     height: calc(100% + 0.25rem);
     border-radius: 1rem;
     background: linear-gradient(-20deg, var(--night-info));
-    box-shadow: 0px 0px 10px 5px var(--night-info-glow);
+    box-shadow: 0px 0px 25px 5px var(--night-info-glow);
 }
 
 #search-container {
@@ -369,6 +369,7 @@ section {
 #search-input::-moz-placeholder {
     color: inherit;
 }
+
 #search-input::placeholder {
     color: inherit;
 }
@@ -407,8 +408,8 @@ section {
     -webkit-backdrop-filter: blur(5rem);
     box-shadow: var(--shadow-elevation-low);
 
-    transition: height 5s ease-in-out;
-    /*???*/
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 #autocomplete-box h5 {
@@ -417,8 +418,14 @@ section {
     margin: 0.3rem;
     background-color: var(--autocomplete-card);
     text-align: center;
-    font-weight: 400;
+    font-weight: 490;
     box-shadow: var(--shadow-elevation-low);
+    cursor: pointer;
+    transition: scale 0.2s ease-in-out;
+}
+
+#autocomplete-box h5:hover {
+    scale: 1.02;
 }
 
 #info-container {

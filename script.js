@@ -6,7 +6,7 @@ const autocompleteBox = document.getElementById('autocomplete-box');
 
 async function getWeather(location) {
     try {
-        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${KEY}&&q=${location}&days=3&aqi=no&alerts=no`);
+        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=3&aqi=no&alerts=no`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -104,8 +104,10 @@ async function updateWeatherData(searchIndex) {
     if (searches.length == 0) return;
     weatherData = await getWeather(searches[searchIndex]);
     console.log(weatherData);
-    autocompleteBox.innerHTML = '';
+    autocompleteBox.style.opacity = '0';
+    // autocompleteBox.innerHTML = '';
     searches = [];
+    document.activeElement.blur();
 }
 
 let searches = [];
@@ -115,12 +117,14 @@ async function updateAutocomplete(e) {
     } else {
         searches = await searchLocation(searchInput.value.trim());
         autocompleteBox.innerHTML = '';
-        searches.forEach(search_res => {
+        searches.forEach((search_res, search_ind) => {
             let element = document.createElement('h5');
             element.innerHTML = search_res;
+            element.onclick= ()=>{updateWeatherData(search_ind)};
             autocompleteBox.appendChild(element);
         });
     }
+    autocompleteBox.style.opacity = `${searches.length == 0 ? 0 : 1}`;
 }
 
 searchInput.addEventListener('keyup', e => updateAutocomplete(e));
