@@ -31,9 +31,14 @@
     --day-info1: #1ff20780;
     --autocomplete: #6e9ad4bf;
     --autocomplete-card: #2e3de0;
-    --bar-daylight: #f4b240;
-    --bar-moonlight: #041547;
-    --bar-darknight: #1e1e1e;
+    --bar-daylight: #f4b13e;
+    --bar-moonlight: #142452;
+    --bar-darknight: #1f1f1f;
+    --bar-gap-perc: 10%;
+    --bar-sunrise: 100%;
+    --bar-sunset: 0%;
+    --bar-moonrise: 0%;
+    --bar-moonset: 0%;
 }
 
 :root[data-theme="light"] {
@@ -533,10 +538,30 @@ footer {
 }
 
 .daycycle-bar {
+    position: relative;
     width: 80%;
     height: 1rem;
     border-radius: 1rem;
-    background: linear-gradient(to right, var(--bar-daylight) 0%, var(--bar-moonlight) 20%, var(--bar-darknight) 90%, #f4b240 100%);
+    background: var(--bar-darknight);
+}
+
+.daycycle-bar::before,
+.daycycle-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 1rem;
+}
+
+.daycycle-bar::before {
+    background: linear-gradient(to right, transparent 0%, transparent calc(var(--bar-moonrise) - var(--bar-gap-perc)), var(--bar-moonlight) calc(var(--bar-moonrise) + var(--bar-gap-perc)), var(--bar-moonlight) calc(var(--bar-moonset) - var(--bar-gap-perc)), transparent calc(var(--bar-moonset) + var(--bar-gap-perc)), transparent 100%);
+}
+
+.daycycle-bar::after {
+    background: linear-gradient(to right, var(--bar-daylight) 0%, var(--bar-daylight) calc(var(--bar-sunset) - var(--bar-gap-perc)), transparent calc(var(--bar-sunset) + var(--bar-gap-perc)), transparent calc(var(--bar-sunrise) - var(--bar-gap-perc)), var(--bar-daylight) calc(var(--bar-sunrise) + var(--bar-gap-perc)), var(--bar-daylight) 100%);
 }
 
 /*info container/*/

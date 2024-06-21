@@ -172,3 +172,27 @@ function setClock(digits, arr) {
     });
 }
 // clock digits
+
+function timeToRatio(timeString) {
+    const [hours, minutes, period] = timeString.split(/[:\s]/);
+    let hourValue = parseInt(hours, 10);
+    if (period === "PM" && hourValue !== 12) {
+        hourValue += 12;
+    } else if (period === "AM" && hourValue === 12) {
+        hourValue = 0;
+    }
+    let ratio24 = hourValue + parseFloat(minutes, 10) / 60;
+    let ratio24centered = (ratio24 + 12) % 24;
+    let ratio100centered = (ratio24centered * 100 / 24)
+    return ratio100centered.toFixed(1) + '%';
+}
+
+const percentageGap = 1;
+function getBarGradient(sunrise, sunset, moonrise, moonset) {
+    root.style.setProperty('--bar-sunrise', timeToRatio(sunrise))
+    root.style.setProperty('--bar-sunset', timeToRatio(sunset))
+    root.style.setProperty('--bar-moonrise', timeToRatio(moonrise))
+    root.style.setProperty('--bar-moonset', timeToRatio(moonset))
+}
+
+// day cycle bar
