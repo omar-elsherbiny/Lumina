@@ -103,15 +103,20 @@ let weatherData;
 async function updateWeatherData(searchIndex) {
     if (searches.length == 0) return;
     weatherData = await getWeather(searches[searchIndex]);
+    searchInput.value = searches[searchIndex];
     console.log(weatherData);
     autocompleteBox.style.opacity = '0';
-    // autocompleteBox.innerHTML = '';
+    let timeout = setTimeout(() => {
+        autocompleteBox.innerHTML = '';
+        clearTimeout(timeout);
+    }, 200);
     searches = [];
     document.activeElement.blur();
 }
 
 let searches = [];
 async function updateAutocomplete(e) {
+    prev_query = searchInput.value;
     if (e.key === 'Enter' || e.keyCode === 13) {
         updateWeatherData(0);
     } else {
@@ -120,7 +125,7 @@ async function updateAutocomplete(e) {
         searches.forEach((search_res, search_ind) => {
             let element = document.createElement('h5');
             element.innerHTML = search_res;
-            element.onclick= ()=>{updateWeatherData(search_ind)};
+            element.onclick = () => { updateWeatherData(search_ind) };
             autocompleteBox.appendChild(element);
         });
     }
@@ -128,4 +133,14 @@ async function updateAutocomplete(e) {
 }
 
 searchInput.addEventListener('keyup', e => updateAutocomplete(e));
+let prev_query;
+searchInput.addEventListener('focus', e => {
+    prev_query = searchInput.value;
+    searchInput.value = '';
+    autocompleteBox.style.opacity = '0';
+});
+searchInput.addEventListener('focusout', e => {
+    searchInput.value = prev_query;
+    autocompleteBox.style.opacity = '1';
+});
 // search box 

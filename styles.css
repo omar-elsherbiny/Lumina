@@ -40,7 +40,6 @@
     --title-bgr1: #0f53ff;
     --text: #1a1a1a;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0e042a66), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #12075033);
-    --night-info-glow: color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0e042a4d);
 }
 
 :root[data-theme="dark"] {
@@ -50,7 +49,6 @@
     --title-bgr1: #a8c1ff;
     --text: #e5e5e5;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0e042a80), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #1207504d);
-    --night-info-glow: color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0e042a80);
 }
 
 /*root/*/
@@ -289,27 +287,11 @@ main {
     background: linear-gradient(to top left, var(--main-trans));
     backdrop-filter: blur(1rem);
     -webkit-backdrop-filter: blur(1rem);
-}
-
-main:before,
-main:after {
-    content: '';
-    position: absolute;
-    top: 5%;
-    left: 32%;
-    height: 90%;
-    width: 2pt;
-    border-radius: 0.1rem;
-    background-color: var(--border-highlight);
-    pointer-events: none;
-}
-
-main:after {
-    left: 67%;
+    box-shadow: var(--shadow-elevation-low);
 }
 
 section {
-    height: 98%;
+    height: 100%;
     width: 32%;
 }
 
@@ -330,7 +312,7 @@ section {
     height: calc(100% + 0.25rem);
     border-radius: 1rem;
     background: linear-gradient(-20deg, var(--night-info));
-    box-shadow: 0px 0px 25px 5px var(--night-info-glow);
+    box-shadow: var(--shadow-elevation-medium);
 }
 
 #search-container {
@@ -354,7 +336,7 @@ section {
     outline: none;
     border: none;
     font-weight: 800;
-    font-size: 12.2pt;
+    font-size: 12pt;
     width: calc(100% - 28px);
     color: var(--text);
 }
@@ -396,7 +378,7 @@ section {
 #search-container>#autocomplete-box {
     position: absolute;
     top: calc(100% + 0.1rem);
-    left: -3pt;
+    width: 95%;
     height: fit-content;
     align-items: start;
     justify-content: start;
