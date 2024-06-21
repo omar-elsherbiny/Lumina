@@ -7,6 +7,13 @@ const autocompleteBox = document.getElementById('autocomplete-box');
 const currentWeatherIcon = document.querySelector('#current-weather-icon img');
 const currentTemp = document.querySelectorAll('#current-temp .digit');
 const currentDesc = document.getElementById('current-desc');
+const feelsLike = document.querySelectorAll('#feels-like .digit');
+const humidity = document.querySelectorAll('#humidity .digit');
+const uv = document.querySelectorAll('#uv .digit');
+const wind = document.querySelectorAll('#wind .digit');
+const clouds = document.querySelectorAll('#clouds .digit');
+const rain = document.querySelectorAll('#rain .digit');
+const snow = document.querySelectorAll('#snow .digit');
 
 async function getWeather(location) {
     try {
@@ -80,6 +87,7 @@ unitToggle.addEventListener('click', function () {
 
     if (wd != null) {
         setClock(currentTemp, tempToArr(wd.current[`temp_${targetUnit}`], targetUnit));
+        setClock(feelsLike, tempToArr(wd.current[`feelslike_${targetUnit}`], targetUnit));
     }
 });
 // unit switch
@@ -123,6 +131,14 @@ async function applyNewWeatherData(location) {
     currentWeatherIcon.src = 'https:' + wd.current.condition.icon.replace(/64x64/g, "128x128");
     setClock(currentTemp, tempToArr(wd.current[`temp_${cu}`], cu));
     currentDesc.innerHTML = wd.current.condition.text;
+
+    setClock(feelsLike, tempToArr(wd.current[`feelslike_${cu}`], cu));
+    setClock(humidity, Array.from(wd.current.humidity.toString()));
+    setClock(uv, [wd.current.uv]);
+    setClock(wind, tempToArr(wd.current.wind_kph));
+    setClock(clouds, numToArr(wd.current.cloud));
+    setClock(rain, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_rain));
+    setClock(snow, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_snow));
 }
 
 function confirmAutocomplete(searchIndex) {
@@ -168,16 +184,20 @@ searchInput.addEventListener('focusout', e => {
 });
 // search box 
 
+function numToArr(num) {
+    return num.toString().padStart(3, ' ').split('').map(char => char == ' ' ? ' ' : Number(char));
+}
+
 function tempToArr(temp, unit) {
     const parts = temp.toString().split(".");
     let intStr = parts[0];
     intStr = intStr.padStart(3, " ");
-    let decStr = "";
+    let decStr = "0";
     if (parts.length > 1) {
         decStr = parts[1].slice(0, 2);
     }
     let arr = [...intStr].concat(decStr.split(""));
-    arr.push(unit == 'c' ? '°C' : '°F');
+    if (unit != null) arr.push(unit == 'c' ? '°C' : '°F');
     return arr;
 }
 

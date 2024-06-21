@@ -525,7 +525,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 0.8rem;
+    padding-right: 0.25rem;
 }
 
 .key-icon {
@@ -534,12 +534,11 @@ footer {
 }
 
 .value.clock-digit-container p {
-    font-weight: 400;
-    font-size: 1.5rem;
+    font-size: 0.83em;
 }
 
 .value.clock-digit-container .digit {
-    height: 1.5rem;
+    height: 0.83em;
 }
 
 #extended-night-info .value {
