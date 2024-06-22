@@ -39,6 +39,7 @@
     --bar-sunset: 0%;
     --bar-moonrise: 0%;
     --bar-moonset: 0%;
+    --bar-selector-perc: 50%;
     --text3: #e6e6e6;
 }
 
@@ -598,11 +599,17 @@ footer {
     background: linear-gradient(to right, var(--bar-daylight) 0%, var(--bar-daylight) calc(var(--bar-sunset) - var(--bar-gap-perc)), transparent calc(var(--bar-sunset) + var(--bar-gap-perc)), transparent calc(var(--bar-sunrise) - var(--bar-gap-perc)), var(--bar-daylight) calc(var(--bar-sunrise) + var(--bar-gap-perc)), var(--bar-daylight) 100%);
 }
 
+.daycycle-bar div {
+    position: absolute;
+    top: 50%;
+    left: var(--bar-selector-perc);
+    height: 1.2rem;
+    width: 0.25rem;
+    border-radius: 1rem;
+    border: 1.2pt solid #def9ff;
+    transform: translate(-50%, -50%);
+    transition: left 0.5s ease-in-out;
+}
+
 /*info container/*/
 /*current container/*/
-
-/* @media screen and (max-width:1090px) {
-    .info-piece {
-        justify-content: space-around;
-    }
-} */

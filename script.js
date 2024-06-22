@@ -135,7 +135,8 @@ async function applyNewWeatherData(location) {
     let cu = document.documentElement.getAttribute('data-unit'); // current unit
     console.log(wd);
 
-    let [cDate, cTime] = wd.location.localtime.split(' ');
+    let [cDate, garbage] = wd.location.localtime.split(' ');
+    let cTime = (new Date).toLocaleTimeString('en-US', { hour12: false });
     setClock(time, timeToArr(cTime));
     setClock(date, dateToArr(cDate));
 
@@ -181,6 +182,7 @@ async function applyNewWeatherData(location) {
     setClock(moonset, timeToArr(astro.moonset));
 
     setBarGradient(astro.sunrise, astro.sunset, astro.moonrise, astro.moonset);
+    root.style.setProperty('--bar-selector-perc', timeToRatio(cTime))
 }
 
 function confirmAutocomplete(searchIndex) {
@@ -331,7 +333,20 @@ function setMoon(moon_desc, moon_illum) {
 setMoon('New Moon', 0);
 // moon svg
 
-// function cHeight(id) {
-//     return document.getElementById(id).getBoundingClientRect().height;
-// }
-// document.getElementById('centered-night-info').style.paddingBottom= cHeight('info-container') - cHeight('centered-night-info') - cHeight('extended-night-info') + 'px';
+function getDelayUntilNextMinute() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const milliseconds = now.getMilliseconds();
+    return (60 * 1000) - (seconds * 1000 + milliseconds);
+}
+
+setTimeout(function () {
+    if (prev_query != '') {
+        applyNewWeatherData(prev_query);
+    }
+    setInterval(() => {
+        if (prev_query != '') {
+            applyNewWeatherData(prev_query);
+        }
+    }, 60 * 1000);
+}, getDelayUntilNextMinute());
