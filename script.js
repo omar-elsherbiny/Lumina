@@ -135,8 +135,8 @@ async function applyNewWeatherData(location) {
     let cu = document.documentElement.getAttribute('data-unit'); // current unit
     console.log(wd);
 
-    let [cDate, garbage] = wd.location.localtime.split(' ');
-    let cTime = (new Date).toLocaleTimeString('en-US', { hour12: false });
+    let [cDate, cTime] = wd.location.localtime.split(' ');
+    //let cTime = (new Date).toLocaleTimeString('en-US', { hour12: false });
     setClock(time, timeToArr(cTime));
     setClock(date, dateToArr(cDate));
 
@@ -340,13 +340,13 @@ function getDelayUntilNextMinute() {
     return (60 * 1000) - (seconds * 1000 + milliseconds);
 }
 
-setTimeout(function () {
-    if (prev_query != '') {
-        applyNewWeatherData(prev_query);
-    }
-    setInterval(() => {
-        if (prev_query != '') {
-            applyNewWeatherData(prev_query);
-        }
-    }, 60 * 1000);
-}, getDelayUntilNextMinute());
+// setTimeout(function () {
+//     if (prev_query != '') {
+//         applyNewWeatherData(prev_query);
+//     }
+//     setInterval(() => {
+//         if (prev_query != '') {
+//             applyNewWeatherData(prev_query);
+//         }
+//     }, 60 * 1000);
+// }, getDelayUntilNextMinute());

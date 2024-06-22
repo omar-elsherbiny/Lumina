@@ -292,7 +292,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 80%;
+    width: clamp(70dvw, 80%, 100dvw);
     height: 80%;
     transform: translateY(1rem);
     padding: 0.2rem;
@@ -410,7 +410,7 @@ footer {
     outline: none;
     border: none;
     font-weight: 800;
-    font-size: 12pt;
+    font-size: 12.5pt;
     width: calc(100% - 28px);
     color: var(--text);
 }
@@ -618,3 +618,20 @@ footer {
 
 /*info container/*/
 /*current container/*/
+
+@media screen and (max-width:790px) {
+    #current-container {
+        position: relative;
+    }
+
+    main {
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+    }
+
+    section {
+        scroll-snap-align: start;
+        min-width: 100%;
+        ;
+    }
+}
