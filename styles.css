@@ -305,7 +305,9 @@ main {
 
 section {
     height: 100%;
-    width: 32%;
+    width: 33.3%;
+    /* border: 1pt solid red; */
+    border-radius: 1rem;
 }
 
 footer {
@@ -361,19 +363,22 @@ footer {
 
 /*current container*/
 #current-container {
-    position: relative;
+    box-sizing: border-box;
+    position: absolute;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
+    padding: 0.2rem;
+    transition: transform 1s cubic-bezier(.5, 0, .2, 1);
 }
 
 #current-container::before {
     content: '';
     position: absolute;
-    top: -0.2rem;
-    left: -0.2rem;
-    width: calc(100% + 0.4rem);
-    height: calc(100% + 0.4rem);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 1rem;
     background: linear-gradient(-20deg, var(--night-info));
     box-shadow: var(--shadow-elevation-medium);
