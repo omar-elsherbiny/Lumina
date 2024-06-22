@@ -124,7 +124,6 @@ function updateInfoContainer() {
     root.style.setProperty('--day-info-opacity', lerp(100, 0, moon_desc) + '%');
 }
 
-updateInfoContainer();
 infoContainer.addEventListener('scroll', updateInfoContainer);
 // scroll animation
 
@@ -136,7 +135,6 @@ async function applyNewWeatherData(location) {
     console.log(wd);
 
     let [cDate, cTime] = wd.location.localtime.split(' ');
-    //let cTime = (new Date).toLocaleTimeString('en-US', { hour12: false });
     setClock(time, timeToArr(cTime));
     setClock(date, dateToArr(cDate));
 
@@ -191,6 +189,7 @@ function confirmAutocomplete(searchIndex) {
     document.activeElement.blur();
     searchInput.value = searches[searchIndex];
     prev_query = searches[searchIndex];
+    localStorage.setItem('location', prev_query);
     autocompleteBox.style.opacity = '0';
     let timeout = setTimeout(() => {
         autocompleteBox.innerHTML = '';
@@ -227,6 +226,7 @@ searchInput.addEventListener('focusout', e => {
     autocompleteBox.style.opacity = '0';
 });
 // search box 
+
 function dateToArr(dateString) {
     const date = new Date(dateString);
     const dayOfWeek = date.toLocaleDateString("en-US", { weekday: 'long' });
@@ -314,6 +314,7 @@ function setBarGradient(sunrise, sunset, moonrise, moonset) {
 }
 
 // day cycle bar
+
 function setMoon(moon_desc, moon_illum) {
     let ind;
     if (moon_desc == 'New Moon') ind = 0;
@@ -330,7 +331,6 @@ function setMoon(moon_desc, moon_illum) {
     });
     nightMoonIcon[ind].style.top = '0';
 }
-setMoon('New Moon', 0);
 // moon svg
 
 function getDelayUntilNextMinute() {
@@ -339,6 +339,24 @@ function getDelayUntilNextMinute() {
     const milliseconds = now.getMilliseconds();
     return (60 * 1000) - (seconds * 1000 + milliseconds);
 }
+
+if (navigator.userAgent.includes('Firefox')) {
+    document.querySelectorAll('.scroll').forEach(element => {
+        element.classList.add('scroll-moz');
+    });
+}
+
+let location_cookie = localStorage.getItem('location') || false;
+if (location_cookie) {
+    let timeout = setTimeout(() => {
+        applyNewWeatherData(location_cookie);
+        searchInput.value = location_cookie;
+        clearTimeout(timeout);
+    }, 2000);
+}
+
+updateInfoContainer();
+setMoon('New Moon', 0);
 
 // setTimeout(function () {
 //     if (prev_query != '') {
@@ -350,3 +368,5 @@ function getDelayUntilNextMinute() {
 //         }
 //     }, 60 * 1000);
 // }, getDelayUntilNextMinute());
+
+// main run

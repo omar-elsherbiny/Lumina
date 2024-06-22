@@ -46,8 +46,7 @@
 :root[data-theme="light"] {
     --border-highlight: rgba(0, 0, 0, 0.2);
     --bgr-opacity: 1;
-    --title-bgr0: #340fa3;
-    --title-bgr1: #0f53ff;
+    --title-bgr: #340fa3, #ff7657;
     --text: #1a1a1a;
     --text2: #303030;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0a085466), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0f720433);
@@ -56,8 +55,7 @@
 :root[data-theme="dark"] {
     --border-highlight: rgba(255, 255, 255, 0.2);
     --bgr-opacity: 0;
-    --title-bgr0: #c9b9f8;
-    --title-bgr1: #a8c1ff;
+    --title-bgr: #d2c3fe, #ff8f75;
     --text: #e6e6e6;
     --text2: #fcfcfd;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0a085491), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0f72044d);
@@ -129,23 +127,8 @@ body * {
     background: transparent;
 }
 
-.scroll::-moz-scrollbar {
-    width: 4pt;
-}
-
-.scroll::-moz-scrollbar-track {
-    background-color: transparent;
-}
-
-.scroll::-moz-scrollbar-thumb {
-    background-color: var(--border-highlight);
-    border-radius: 50px;
-    background-clip: content-box;
-    height: 60px;
-}
-
-.scroll::-moz-scrollbar-corner {
-    background: transparent;
+.scroll-moz {
+    scrollbar-color: var(--border-highlight) transparent;
 }
 
 input[type="checkbox"].toggle+label {
@@ -240,8 +223,9 @@ nav>div {
 }
 
 #title {
+    font-family: 'Josefin Sans';
     font-weight: 500;
-    background: linear-gradient(30deg, var(--title-bgr0), var(--title-bgr1));
+    background: linear-gradient(10deg, var(--title-bgr));
     background-clip: text;
     color: transparent;
     -webkit-background-clip: text;
@@ -428,6 +412,7 @@ footer {
 
 #search-input::placeholder {
     color: inherit;
+    opacity: 0.8;
 }
 
 #search-input,
