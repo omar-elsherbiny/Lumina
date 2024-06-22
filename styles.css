@@ -521,7 +521,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    width: clamp(8rem, 70%, 100%);
+    width: clamp(12rem, 70%, 100%);
     padding: 0.15rem 0;
 }
 
@@ -601,8 +601,8 @@ footer {
 /*info container/*/
 /*current container/*/
 
-@media screen and (max-width:1090px) {
+/* @media screen and (max-width:1090px) {
     .info-piece {
         justify-content: space-around;
     }
-}
+} */
