@@ -15,6 +15,7 @@ const wind = document.querySelectorAll('#wind .digit');
 const clouds = document.querySelectorAll('#clouds .digit');
 const rain = document.querySelectorAll('#rain .digit');
 const snow = document.querySelectorAll('#snow .digit');
+const nightMoonIcon = document.querySelectorAll('#night-moon-icon svg');
 
 async function getWeather(location) {
     try {
@@ -100,17 +101,17 @@ function getScrollPercentage(element) {
     return 1 - Math.max(Math.min(scrollPerc, 1), 0);
 }
 
-function lerp(a, b, t, capped = true) {
+function lerp(a, b, moon_desc, capped = true) {
     if (capped) {
-        t = Math.max(Math.min(t, 1), 0);
+        moon_desc = Math.max(Math.min(moon_desc, 1), 0);
     }
-    return ((1 - t) * a + t * b).toFixed(1);
+    return ((1 - moon_desc) * a + moon_desc * b).toFixed(1);
 }
 
 function updateInfoContainer() {
-    let t = getScrollPercentage(infoContainer);
-    root.style.setProperty('--day-info-opacity', lerp(100, 0, t) + '%');
-    // document.getElementById('night-moon-icon').style.transform = `translateX(-${lerp(400, 0, t)}%)`
+    let moon_desc = getScrollPercentage(infoContainer);
+    root.style.setProperty('--day-info-opacity', lerp(100, 0, moon_desc) + '%');
+    // document.getElementById('night-moon-icon').style.transform = `translateX(-${lerp(400, 0, moon_desc)}%)`
 }
 
 updateInfoContainer();
@@ -259,6 +260,25 @@ function setBarGradient(sunrise, sunset, moonrise, moonset) {
 }
 
 // day cycle bar
+function setMoon(moon_desc, moon_illum) {
+    let ind;
+    if (moon_desc == 'New Moon') ind = 0;
+    if (moon_desc == 'Waxing Crescent') ind = Math.round(0.1 * moon_illum + 1);
+    if (moon_desc == 'First Quarter') ind = 7;
+    if (moon_desc == 'Waxing Gibbous') ind = 2 + Math.round(0.1 * moon_illum + 1);
+    if (moon_desc == 'Full Moon') ind = 14;
+    if (moon_desc == 'Waning Gibbous') ind = 26 - Math.round(0.1 * moon_illum + 1);
+    if (moon_desc == 'Third Quarter') ind = 21;
+    if (moon_desc == 'Waning Crescent') ind = 28 - Math.round(0.1 * moon_illum + 1);
+
+    nightMoonIcon.forEach(svg => {
+        svg.style.top = '100%';
+    });
+    nightMoonIcon[ind].style.top = '0';
+}
+setMoon('New Moon', 0);
+// moon svg
+
 // let b = setBarGradient("06:00 AM", "06:00 PM", "10:00 PM", "7:00 AM");
 // function cHeight(id) {
 //     return document.getElementById(id).getBoundingClientRect().height;

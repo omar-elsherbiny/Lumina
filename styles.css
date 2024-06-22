@@ -553,8 +553,18 @@ footer {
 
 #current-weather-icon,
 #night-moon-icon {
+    position: relative;
     width: 64px;
     height: 64px;
+    overflow-y: hidden;
+}
+
+#night-moon-icon svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 100%;
+    transition: top 0.2s ease-in-out;
 }
 
 .daycycle-bar {
