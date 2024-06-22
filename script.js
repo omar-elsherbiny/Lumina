@@ -14,12 +14,15 @@ const feelsLike = document.querySelectorAll('#feels-like .digit');
 const humidity = document.querySelectorAll('#humidity .digit');
 const uv = document.querySelectorAll('#uv .digit');
 const wind = document.querySelectorAll('#wind .digit');
+const windDir = document.querySelectorAll('#wind-dir .digit');
+const windDirIcon = document.getElementById('wind-dir-icon');
 const clouds = document.querySelectorAll('#clouds .digit');
 const rain = document.querySelectorAll('#rain .digit');
 const snow = document.querySelectorAll('#snow .digit');
 const nightMoonIcon = document.querySelectorAll('#night-moon-icon svg');
 const moonDesc = document.getElementById('moon-desc');
 const moonLumin = document.querySelectorAll('#moon-lumin .digit');
+const visibility = document.querySelectorAll('#visibility .digit');
 const sunrise = document.querySelectorAll('#sunrise .digit');
 const sunset = document.querySelectorAll('#sunset .digit');
 const moonrise = document.querySelectorAll('#moonrise .digit');
@@ -119,7 +122,6 @@ function lerp(a, b, moon_desc, capped = true) {
 function updateInfoContainer() {
     let moon_desc = getScrollPercentage(infoContainer);
     root.style.setProperty('--day-info-opacity', lerp(100, 0, moon_desc) + '%');
-    // document.getElementById('night-moon-icon').style.transform = `translateX(-${lerp(400, 0, moon_desc)}%)`
 }
 
 updateInfoContainer();
@@ -136,7 +138,6 @@ async function applyNewWeatherData(location) {
     let [cDate, cTime] = wd.location.localtime.split(' ');
     setClock(time, timeToArr(cTime));
     setClock(date, dateToArr(cDate));
-    console.log(dateToArr(cDate));
 
     if (is_day != wd.current.is_day) {
         currentContainer.classList.add('invis');
@@ -162,6 +163,8 @@ async function applyNewWeatherData(location) {
     setClock(humidity, Array.from(wd.current.humidity.toString()));
     setClock(uv, [wd.current.uv]);
     setClock(wind, tempToArr(wd.current.wind_kph));
+    setClock(windDir, [wd.current.wind_dir]);
+    windDirIcon.style.rotate = wd.current.wind_degree + 'deg';
     setClock(clouds, numToArr(wd.current.cloud));
     setClock(rain, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_rain));
     setClock(snow, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_snow));
@@ -171,6 +174,7 @@ async function applyNewWeatherData(location) {
     moonDesc.innerHTML = astro.moon_phase;
     setClock(moonLumin, numToArr(astro.moon_illumination));
 
+    setClock(visibility, numToArr(wd.current.vis_km, 2));
     setClock(sunrise, timeToArr(astro.sunrise));
     setClock(sunset, timeToArr(astro.sunset));
     setClock(moonrise, timeToArr(astro.moonrise));
@@ -228,7 +232,7 @@ function dateToArr(dateString) {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     let res = [dayOfWeek];
-    res = res.concat(numToArr(day, 2)).concat(numToArr(month, 2,'0')).concat(numToArr(year, 1));
+    res = res.concat(numToArr(day, 2)).concat(numToArr(month, 2, '0')).concat(numToArr(year, 1));
     return res;
 }
 
@@ -245,7 +249,7 @@ function timeToArr(timeString) {
     return [hour24[0], ...hour24.slice(1), ...minutes24.split('')];
 }
 
-function numToArr(num, pad = 3,padder=' ') {
+function numToArr(num, pad = 3, padder = ' ') {
     return num.toString().padStart(pad, padder).split('').map(char => char == ' ' ? ' ' : Number(char));
 }
 

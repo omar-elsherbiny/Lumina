@@ -534,7 +534,10 @@ footer {
 
 .key-icon {
     color: var(--text3);
-    padding-right: 0.8rem;
+}
+
+.key-name {
+    padding-left: 0.8rem;
 }
 
 .value.clock-digit-container p {

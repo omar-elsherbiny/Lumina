@@ -535,6 +535,44 @@
                         </div>
                         <div class="info-piece">
                             <div class="key">
+                                <svg id='wind-dir-icon' style="transition: rotate 0.5s ease-in-out;rotate:0deg;"
+                                    class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.5">
+                                        <path d="M12 16.5v-9M8.5 11L12 7.5l3.5 3.5" />
+                                    </g>
+                                    <g fill="none" stroke="url(#grad5)" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="9" />
+                                    </g>
+                                </svg>
+                                <h5 class="key-name">Wind Direction:</h5>
+                            </div>
+                            <div id="wind-dir" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>N</p>
+                                    <p>NNE</p>
+                                    <p>NE</p>
+                                    <p>ENE</p>
+                                    <p>E</p>
+                                    <p>ESE</p>
+                                    <p>SE</p>
+                                    <p>SSE</p>
+                                    <p>S</p>
+                                    <p>SSW</p>
+                                    <p>SW</p>
+                                    <p>WSW</p>
+                                    <p>W</p>
+                                    <p>WNW</p>
+                                    <p>NW</p>
+                                    <p>NNW</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
                                 <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                     viewBox="0 0 24 24">
                                     <path fill="none" stroke="url(#grad5)" stroke-linecap="round"
@@ -856,7 +894,46 @@
                     <div id="extended-night-info">
                         <div class="info-piece">
                             <div class="key">
-                                <h5>Sun: </h5>
+                                <svg class="key-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 24 24">
+                                    <path fill="url(#grad5)"
+                                        d="M12 6a9.77 9.77 0 0 1 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5A9.77 9.77 0 0 1 12 6m0-2C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7" />
+                                </svg>
+                                <h5 class="key-name">Visibility:</h5>
+                            </div>
+                            <div id="visibility" class="value clock-digit-container">
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <div class="digit">
+                                    <p class="current">-</p>
+                                    <p>0</p>
+                                    <p>1</p>
+                                    <p>2</p>
+                                    <p>3</p>
+                                    <p>4</p>
+                                    <p>5</p>
+                                    <p>6</p>
+                                    <p>7</p>
+                                    <p>8</p>
+                                    <p>9</p>
+                                </div>
+                                <h5 style="padding-left: 0.2rem;font-weight: 500;">km</h5>
+                            </div>
+                        </div>
+                        <div class="info-piece">
+                            <div class="key">
+                                <h5>Sunrise to Sunset: </h5>
                             </div>
                             <div class="value">
                                 <div id="sunrise" class="clock-digit-container">
@@ -977,7 +1054,7 @@
                         </div>
                         <div class="info-piece">
                             <div class="key">
-                                <h5>Moon: </h5>
+                                <h5>Moonise to Moonset: </h5>
                             </div>
                             <div class="value">
                                 <div id="moonrise" class="clock-digit-container">
