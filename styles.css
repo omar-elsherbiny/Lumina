@@ -49,7 +49,7 @@
     --title-bgr1: #0f53ff;
     --text: #1a1a1a;
     --text2: #303030;
-    --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), hsla(241, 82%, 18%, 0.4)), color-mix(in lab, var(--day-info0) var(--day-info-opacity), hsla(161, 84%, 17%, 0.2));
+    --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0a085466), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0f720433);
 }
 
 :root[data-theme="dark"] {
@@ -59,7 +59,7 @@
     --title-bgr1: #a8c1ff;
     --text: #e6e6e6;
     --text2: #fcfcfd;
-    --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), hsla(241, 82%, 18%, 0.57)), color-mix(in lab, var(--day-info0) var(--day-info-opacity), hsla(161, 84%, 17%, 0.302));
+    --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0a085491), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0f72044d);
 }
 
 /*root/*/
@@ -369,13 +369,18 @@ footer {
 #current-container::before {
     content: '';
     position: absolute;
-    top: -0.25rem;
-    left: -0.25rem;
-    width: calc(100% + 0.25rem);
-    height: calc(100% + 0.25rem);
+    top: -0.2rem;
+    left: -0.2rem;
+    width: calc(100% + 0.4rem);
+    height: calc(100% + 0.4rem);
     border-radius: 1rem;
     background: linear-gradient(-20deg, var(--night-info));
     box-shadow: var(--shadow-elevation-medium);
+    transition: opacity 0.15s ease-in-out;
+}
+
+#current-container.invis::before {
+    opacity: 0;
 }
 
 #search-container {

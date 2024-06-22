@@ -1,5 +1,6 @@
 const KEY = 'baac031bcdaa4ae8b7b05039241606'; // :<
 const root = document.querySelector(':root');
+const currentContainer = document.getElementById('current-container');
 const infoContainer = document.getElementById('info-container');
 const searchInput = document.getElementById('search-input');
 const autocompleteBox = document.getElementById('autocomplete-box');
@@ -109,6 +110,7 @@ function lerp(a, b, t, capped = true) {
 function updateInfoContainer() {
     let t = getScrollPercentage(infoContainer);
     root.style.setProperty('--day-info-opacity', lerp(100, 0, t) + '%');
+    // document.getElementById('night-moon-icon').style.transform = `translateX(-${lerp(400, 0, t)}%)`
 }
 
 updateInfoContainer();
@@ -116,16 +118,26 @@ infoContainer.addEventListener('scroll', updateInfoContainer);
 // scroll animation
 
 let wd = null; // weather data
+let is_day = 1;
 async function applyNewWeatherData(location) {
     wd = await getWeather(location);
     let cu = document.documentElement.getAttribute('data-unit'); // current unit
     console.log(wd);
-    if (wd.current.is_day) {
-        root.style.setProperty('--day-info0', '#35deed80');
-        root.style.setProperty('--day-info1', '#1ff20780');
-    } else {
-        root.style.setProperty('--day-info0', '#070c5080');
-        root.style.setProperty('--day-info1', '#0b430580');
+
+    if (is_day != wd.current.is_day) {
+        currentContainer.classList.add('invis');
+        let timeout = setTimeout(() => {
+            if (wd.current.is_day) {
+                root.style.setProperty('--day-info0', '#35deed80');
+                root.style.setProperty('--day-info1', '#1ff20780');
+            } else {
+                root.style.setProperty('--day-info0', '#070c5080');
+                root.style.setProperty('--day-info1', '#0b430580');
+            }
+            currentContainer.classList.remove('invis');
+            clearTimeout(timeout);
+            is_day = wd.current.is_day;
+        }, 150);
     }
 
     currentWeatherIcon.src = 'https:' + wd.current.condition.icon.replace(/64x64/g, "128x128");
@@ -239,7 +251,7 @@ function timeToRatio(timeString) {
 }
 
 const percentageGap = 1;
-function getBarGradient(sunrise, sunset, moonrise, moonset) {
+function setBarGradient(sunrise, sunset, moonrise, moonset) {
     root.style.setProperty('--bar-sunrise', timeToRatio(sunrise))
     root.style.setProperty('--bar-sunset', timeToRatio(sunset))
     root.style.setProperty('--bar-moonrise', timeToRatio(moonrise))
@@ -247,4 +259,8 @@ function getBarGradient(sunrise, sunset, moonrise, moonset) {
 }
 
 // day cycle bar
-// let b = getBarGradient("06:00 AM", "06:00 PM", "10:00 PM", "7:00 AM");
+// let b = setBarGradient("06:00 AM", "06:00 PM", "10:00 PM", "7:00 AM");
+// function cHeight(id) {
+//     return document.getElementById(id).getBoundingClientRect().height;
+// }
+// document.getElementById('centered-night-info').style.paddingBottom= cHeight('info-container') - cHeight('centered-night-info') - cHeight('extended-night-info') + 'px';
