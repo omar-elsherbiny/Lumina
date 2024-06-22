@@ -5,6 +5,8 @@ const infoContainer = document.getElementById('info-container');
 const searchInput = document.getElementById('search-input');
 const autocompleteBox = document.getElementById('autocomplete-box');
 
+const date = document.querySelectorAll('#date .digit');
+const time = document.querySelectorAll('#time .digit');
 const currentWeatherIcon = document.querySelector('#current-weather-icon img');
 const currentTemp = document.querySelectorAll('#current-temp .digit');
 const currentDesc = document.getElementById('current-desc');
@@ -16,6 +18,12 @@ const clouds = document.querySelectorAll('#clouds .digit');
 const rain = document.querySelectorAll('#rain .digit');
 const snow = document.querySelectorAll('#snow .digit');
 const nightMoonIcon = document.querySelectorAll('#night-moon-icon svg');
+const moonDesc = document.getElementById('moon-desc');
+const moonLumin = document.querySelectorAll('#moon-lumin .digit');
+const sunrise = document.querySelectorAll('#sunrise .digit');
+const sunset = document.querySelectorAll('#sunset .digit');
+const moonrise = document.querySelectorAll('#moonrise .digit');
+const moonset = document.querySelectorAll('#moonset .digit');
 
 async function getWeather(location) {
     try {
@@ -125,6 +133,11 @@ async function applyNewWeatherData(location) {
     let cu = document.documentElement.getAttribute('data-unit'); // current unit
     console.log(wd);
 
+    let [cDate, cTime] = wd.location.localtime.split(' ');
+    setClock(time, timeToArr(cTime));
+    setClock(date, dateToArr(cDate));
+    console.log(dateToArr(cDate));
+
     if (is_day != wd.current.is_day) {
         currentContainer.classList.add('invis');
         let timeout = setTimeout(() => {
@@ -152,6 +165,18 @@ async function applyNewWeatherData(location) {
     setClock(clouds, numToArr(wd.current.cloud));
     setClock(rain, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_rain));
     setClock(snow, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_snow));
+
+    let astro = wd.forecast.forecastday[0].astro;
+    setMoon(astro.moon_phase, astro.moon_illumination);
+    moonDesc.innerHTML = astro.moon_phase;
+    setClock(moonLumin, numToArr(astro.moon_illumination));
+
+    setClock(sunrise, timeToArr(astro.sunrise));
+    setClock(sunset, timeToArr(astro.sunset));
+    setClock(moonrise, timeToArr(astro.moonrise));
+    setClock(moonset, timeToArr(astro.moonset));
+
+    setBarGradient(astro.sunrise, astro.sunset, astro.moonrise, astro.moonset);
 }
 
 function confirmAutocomplete(searchIndex) {
@@ -196,9 +221,32 @@ searchInput.addEventListener('focusout', e => {
     autocompleteBox.style.opacity = '0';
 });
 // search box 
+function dateToArr(dateString) {
+    const date = new Date(dateString);
+    const dayOfWeek = date.toLocaleDateString("en-US", { weekday: 'long' });
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    let res = [dayOfWeek];
+    res = res.concat(numToArr(day, 2)).concat(numToArr(month, 2,'0')).concat(numToArr(year, 1));
+    return res;
+}
 
-function numToArr(num) {
-    return num.toString().padStart(3, ' ').split('').map(char => char == ' ' ? ' ' : Number(char));
+function timeToArr(timeString) {
+    const [hourString, minutes, meridian] = timeString.replace(' ', ':').split(':');
+    let hour = parseInt(hourString, 10);
+    if (meridian === 'PM' && hour !== 12) {
+        hour += 12;
+    } else if (meridian === 'AM' && hour === 12) {
+        hour = 0;
+    }
+    const hour24 = hour.toString().padStart(2, ' ');
+    const minutes24 = minutes.padStart(2, '0');
+    return [hour24[0], ...hour24.slice(1), ...minutes24.split('')];
+}
+
+function numToArr(num, pad = 3,padder=' ') {
+    return num.toString().padStart(pad, padder).split('').map(char => char == ' ' ? ' ' : Number(char));
 }
 
 function tempToArr(temp, unit) {
@@ -279,7 +327,6 @@ function setMoon(moon_desc, moon_illum) {
 setMoon('New Moon', 0);
 // moon svg
 
-// let b = setBarGradient("06:00 AM", "06:00 PM", "10:00 PM", "7:00 AM");
 // function cHeight(id) {
 //     return document.getElementById(id).getBoundingClientRect().height;
 // }
