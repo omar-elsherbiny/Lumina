@@ -189,7 +189,6 @@ function confirmAutocomplete(searchIndex) {
     document.activeElement.blur();
     searchInput.value = searches[searchIndex];
     prev_query = searches[searchIndex];
-    localStorage.setItem('location', prev_query);
     autocompleteBox.style.opacity = '0';
     let timeout = setTimeout(() => {
         autocompleteBox.innerHTML = '';
@@ -346,27 +345,38 @@ if (navigator.userAgent.includes('Firefox')) {
     });
 }
 
-let location_cookie = localStorage.getItem('location') || false;
-if (location_cookie) {
-    let timeout = setTimeout(() => {
-        applyNewWeatherData(location_cookie);
-        searchInput.value = location_cookie;
-        clearTimeout(timeout);
-    }, 2000);
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            searchLocation(`${position.coords.latitude}, ${position.coords.longitude}`).then(location => {
+                let timeout = setTimeout(() => {
+                    applyNewWeatherData(location);
+                    searchInput.value = location;
+                    prev_query = location;
+                    clearTimeout(timeout);
+                }, 2000);
+            });
+        },
+        (error) => {
+            console.error(error);
+        }
+    );
+} else {
+    console.error("Geolocation is not supported by this browser.");
 }
 
 updateInfoContainer();
 setMoon('New Moon', 0);
 
-// setTimeout(function () {
-//     if (prev_query != '') {
-//         applyNewWeatherData(prev_query);
-//     }
-//     setInterval(() => {
-//         if (prev_query != '') {
-//             applyNewWeatherData(prev_query);
-//         }
-//     }, 60 * 1000);
-// }, getDelayUntilNextMinute());
+setTimeout(function () {
+    if (prev_query != '') {
+        applyNewWeatherData(prev_query);
+    }
+    setInterval(() => {
+        if (prev_query != '') {
+            applyNewWeatherData(prev_query);
+        }
+    }, 60 * 1000);
+}, getDelayUntilNextMinute());
 
 // main run
