@@ -50,6 +50,8 @@
     --text: #1a1a1a;
     --text2: #303030;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0a085466), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0f720433);
+    --card-bgr-day: hsl(38, 58%, 75%);
+    --card-bgr-night: hsl(235, 58%, 75%);
 }
 
 :root[data-theme="dark"] {
@@ -59,6 +61,8 @@
     --text: #e6e6e6;
     --text2: #fcfcfd;
     --night-info: color-mix(in lab, var(--day-info1) var(--day-info-opacity), #0a085491), color-mix(in lab, var(--day-info0) var(--day-info-opacity), #0f72044d);
+    --card-bgr-day: hsl(38, 58%, 55%);
+    --card-bgr-night: hsl(235, 58%, 55%);
 }
 
 /*root/*/
@@ -622,19 +626,21 @@ footer {
 }
 
 #hour-card-container {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
     mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.3rem, rgba(0, 0, 0, 1) calc(100% - 0.6rem), rgba(0, 0, 0, 0) 100%);
     -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.3rem, rgba(0, 0, 0, 1) calc(100% - 0.6rem), rgba(0, 0, 0, 0) 100%);
+    margin: 0.2rem 0;
 }
 
 .hour-card {
     position: relative;
-    width: clamp(11rem, 70%, 100%);
+    width: clamp(12rem, 70%, 100%);
     height: fit-content;
-    background-color: hsl(38, 58%, 75%);
+    background-color: var(--card-bgr-day);
     border-radius: 1rem;
     margin: 0.4rem;
     box-shadow: var(--shadow-elevation-medium);
@@ -642,27 +648,44 @@ footer {
     transition: padding-bottom 0.2s ease-in-out;
     animation: linear fly-in-and-out;
     animation-timeline: view();
+    opacity: 0;
+}
+
+@keyframes fade-in {
+    from {
+        scale: 0.7;
+        opacity: 0;
+    }
+
+    to {
+        scale: 1;
+        opacity: 1;
+    }
 }
 
 @keyframes fly-in-and-out {
     entry 0% {
-        opacity: 0;
-        transform: translateY(100%);
+        opacity: 0.5;
+        scale: 0.7;
+        transform: translateY(90%);
     }
 
     entry 100% {
         opacity: 1;
+        scale: 1;
         transform: translateY(0);
     }
 
     exit 0% {
         opacity: 1;
+        scale: 1;
         transform: translateY(0);
     }
 
     exit 100% {
-        opacity: 0;
-        transform: translateY(-100%);
+        opacity: 0.5;
+        scale: 0.7;
+        transform: translateY(-90%);
     }
 }
 
@@ -736,6 +759,7 @@ footer {
         overflow-x: scroll;
         scroll-snap-type: x mandatory;
         padding: 0;
+        justify-content: start;
     }
 
     section {

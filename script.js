@@ -28,6 +28,8 @@ const sunset = document.querySelectorAll('#sunset .digit');
 const moonrise = document.querySelectorAll('#moonrise .digit');
 const moonset = document.querySelectorAll('#moonset .digit');
 
+const hourCardContainer = document.getElementById('hour-card-container');
+
 async function getWeather(location) {
     try {
         const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=3&aqi=no&alerts=no`);
@@ -181,6 +183,58 @@ async function applyNewWeatherData(location) {
 
     setBarGradient(astro.sunrise, astro.sunset, astro.moonrise, astro.moonset);
     root.style.setProperty('--bar-selector-perc', timeToRatio(cTime))
+
+    hourCardContainer.innerHTML = '';
+    wd.forecast.forecastday[0].hour.forEach((hour, index) => {
+        let element = document.createElement('div');
+        element.classList.add('hour-card');
+        element.onclick = function () { this.classList.toggle("expanded") };
+        element.style.animation = `fade-in 0.5s ${index * 100}ms ease-in-out forwards`;
+        let timeout = setTimeout(() => {
+            element.style.animation = '';
+            clearTimeout(timeout);
+        }, index * 100 + 500);
+        element.style.backgroundColor = `var(--card-bgr-${hour.is_day ? 'day' : 'night'})`;
+        element.innerHTML = `
+        <div class="hour-card-main">
+            <h5 class="hour-card-val">${index.toString().padStart(2, '0')}:00</h5>
+            <h5 class="hour-card-temp">${cu == 'c' ? hour.temp_c + '°C' : hour.temp_f + '°F'}</h5>
+            <div class="hour-card-weather-icon">
+                <img width="100%" height="100%"
+                    src="https:${hour.condition.icon}"></img>
+            </div>
+        </div>
+        <div class="hour-card-extension">
+            <div>
+                <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad5)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M20.278 17.497c3.678-3.154-.214-7.384-4.256-7.384C13.175-.969-3.526 8.197 3.875 16.55" />
+                </svg>
+                <h5 class="hour-card-clouds">${hour.cloud}%</h5>
+            </div>
+            <div>
+                <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad2)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.495 3c3.58 3.56 9.345 7.602 6.932 13.397C18.275 19.163 15.492 21 12.5 21c-2.992 0-5.775-1.837-6.927-4.603C3.161 10.607 8.919 6.561 12.495 3" />
+                </svg>
+                <h5 class="hour-card-humidity">${hour.humidity}%</h5>
+            </div>
+            <div>
+                <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad6)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.004 19L12 14m4.004 7L16 16m-7.996 1L8 12m11.825 5c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                </svg>
+                <h5 class="hour-card-rain">${hour.chance_of_rain}%</h5>
+            </div>
+        </div>`
+        hourCardContainer.appendChild(element);
+    });
 }
 
 function confirmAutocomplete(searchIndex) {
