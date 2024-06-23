@@ -699,7 +699,7 @@ footer {
 .hour-card-main {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .hour-card-main {
@@ -744,6 +744,14 @@ footer {
 .hour-card-icon {
     width: 25px;
     height: 25px;
+}
+
+.hour-card-temp.clock-digit-container p {
+    font-size: 11.2pt;
+}
+
+.hour-card-temp.clock-digit-container .digit {
+    font-size: 11.2pt;
 }
 
 /*today container/*/

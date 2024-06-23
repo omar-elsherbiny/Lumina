@@ -48,7 +48,11 @@ async function searchLocation(query) {
         const data = await response.json();
         let result = [];
         data.forEach(datum => {
-            result.push(`${datum.name}, ${datum.region}, ${datum.country}`)
+            if (datum.region) {
+                result.push(`${datum.name}, ${datum.region}, ${datum.country}`);
+            } else {
+                result.push(`${datum.name}, ${datum.country}`);
+            }
         });
         return result;
     } catch (error) {
@@ -103,6 +107,11 @@ unitToggle.addEventListener('click', function () {
     if (wd != null) {
         setClock(currentTemp, tempToArr(wd.current[`temp_${targetUnit}`], targetUnit));
         setClock(feelsLike, tempToArr(wd.current[`feelslike_${targetUnit}`], targetUnit));
+
+        document.querySelectorAll('.hour-card-temp').forEach((temp, index) => {
+            let hour = wd.forecast.forecastday[0].hour[index];
+            setClock(temp.querySelectorAll('.digit'), tempToArr(hour[`temp_${targetUnit}`], targetUnit));
+        });
     }
 });
 // unit switch
@@ -208,7 +217,7 @@ async function applyNewWeatherData(location) {
             let element = document.createElement('div');
             element.classList.add('hour-card');
             element.onclick = function () { this.classList.toggle("expanded") };
-            element.style.animation = `fade-in 0.5s ${index * 100}ms ease-in-out forwards`;
+            element.style.animation = `fade-in 0.3s ${index * 90}ms ease-in-out forwards`;
             let timeout = setTimeout(() => {
                 element.style.animation = '';
                 element.style.opacity = '1';
@@ -218,7 +227,66 @@ async function applyNewWeatherData(location) {
             element.innerHTML = `
             <div class="hour-card-main">
                 <h5 class="hour-card-val">${index.toString().padStart(2, '0')}:00</h5>
-                <h5 class="hour-card-temp">${cu == 'c' ? hour.temp_c + '°C' : hour.temp_f + '°F'}</h5>
+                <div class="hour-card-temp clock-digit-container">
+                    <div class="digit">
+                        <p class="current">-</p>
+                        <p>0</p>
+                        <p>1</p>
+                        <p>2</p>
+                        <p>3</p>
+                        <p>4</p>
+                        <p>5</p>
+                        <p>6</p>
+                        <p>7</p>
+                        <p>8</p>
+                        <p>9</p>
+                    </div>
+                    <div class="digit">
+                        <p class="current">-</p>
+                        <p>0</p>
+                        <p>1</p>
+                        <p>2</p>
+                        <p>3</p>
+                        <p>4</p>
+                        <p>5</p>
+                        <p>6</p>
+                        <p>7</p>
+                        <p>8</p>
+                        <p>9</p>
+                    </div>
+                    <div class="digit">
+                        <p class="current">-</p>
+                        <p>0</p>
+                        <p>1</p>
+                        <p>2</p>
+                        <p>3</p>
+                        <p>4</p>
+                        <p>5</p>
+                        <p>6</p>
+                        <p>7</p>
+                        <p>8</p>
+                        <p>9</p>
+                    </div>
+                    <p>.</p>
+                    <div class="digit">
+                        <p class="current">-</p>
+                        <p>0</p>
+                        <p>1</p>
+                        <p>2</p>
+                        <p>3</p>
+                        <p>4</p>
+                        <p>5</p>
+                        <p>6</p>
+                        <p>7</p>
+                        <p>8</p>
+                        <p>9</p>
+                    </div>
+                    <div class="digit">
+                        <p class="current">-</p>
+                        <p>°C</p>
+                        <p>°F</p>
+                    </div>
+                </div>
                 <div class="hour-card-weather-icon">
                     <img width="100%" height="100%"
                         src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
@@ -254,8 +322,14 @@ async function applyNewWeatherData(location) {
                 </div>
             </div>`
             hourCardContainer.appendChild(element);
+            setClock(Array.from(element.querySelectorAll('.hour-card-temp .digit')), tempToArr(hour[`temp_${cu}`], cu));
         });
     }
+    let timeout = setTimeout(() => {
+        setClock(Array.from(hourCardContainer.children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
+        clearTimeout(timeout);
+        console.log('niggas');
+    }, 500);
     hourCardContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
 }
 
@@ -408,13 +482,6 @@ function setMoon(moon_desc, moon_illum) {
 }
 // moon svg
 
-function getDelayUntilNextMinute() {
-    const now = new Date();
-    const seconds = now.getSeconds();
-    const milliseconds = now.getMilliseconds();
-    return (60 * 1000) - (seconds * 1000 + milliseconds);
-}
-
 if (navigator.userAgent.includes('Firefox')) {
     document.querySelectorAll('.scroll').forEach(element => {
         element.classList.add('scroll-moz');
@@ -430,7 +497,7 @@ if (navigator.geolocation) {
                     searchInput.value = location;
                     prev_query = location;
                     clearTimeout(timeout);
-                }, 2000);
+                }, 1000);
             });
         },
         (error) => {
@@ -443,6 +510,13 @@ if (navigator.geolocation) {
 
 updateInfoContainer();
 setMoon('New Moon', 0);
+
+function getDelayUntilNextMinute() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const milliseconds = now.getMilliseconds();
+    return (60 * 1000) - (seconds * 1000 + milliseconds);
+}
 
 setTimeout(function () {
     if (prev_query != '') {
