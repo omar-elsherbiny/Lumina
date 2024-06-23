@@ -255,6 +255,7 @@ async function applyNewWeatherData(location) {
             hourCardContainer.appendChild(element);
         });
     }
+    hourCardContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
 }
 
 function confirmAutocomplete(searchIndex) {
