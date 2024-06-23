@@ -211,6 +211,7 @@ async function applyNewWeatherData(location) {
             element.style.animation = `fade-in 0.5s ${index * 100}ms ease-in-out forwards`;
             let timeout = setTimeout(() => {
                 element.style.animation = '';
+                element.style.opacity = '1';
                 clearTimeout(timeout);
             }, index * 100 + 500);
             element.style.backgroundColor = `var(--card-bgr-${hour.is_day ? 'day' : 'night'})`;
@@ -220,7 +221,7 @@ async function applyNewWeatherData(location) {
                 <h5 class="hour-card-temp">${cu == 'c' ? hour.temp_c + '°C' : hour.temp_f + '°F'}</h5>
                 <div class="hour-card-weather-icon">
                     <img width="100%" height="100%"
-                        src="https:${hour.condition.icon}"></img>
+                        src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
                 </div>
             </div>
             <div class="hour-card-extension">
@@ -345,16 +346,16 @@ function tempToArr(temp, unit) {
 function setClock(digits, arr) {
     digits.forEach((digit, dIndex) => {
         let options = digit.children;
-        let target = arr[dIndex];
+        let target = arr[dIndex].toString();
         let currentNode = null;
         if (target != null) {
             for (let i = 0; i < options.length; i++) {
                 const option = options[i];
                 option.classList.remove('current');
                 option.classList.remove('out');
-                if (option.innerHTML < target) {
+                if (option.textContent < target) {
                     option.classList.add('out');
-                } else if (option.innerHTML == target) {
+                } else if (option.textContent == target) {
                     option.classList.add('current');
                     currentNode = option;
                 }
