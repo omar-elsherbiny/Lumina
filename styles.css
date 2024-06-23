@@ -604,6 +604,81 @@ footer {
 /*info container/*/
 /*current container/*/
 
+/*today container*/
+#today-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.hour-card {
+    position: relative;
+    width: 85%;
+    height: fit-content;
+    background-color: hsl(38, 58%, 75%);
+    border-radius: 1rem;
+    margin: 0.4rem;
+    padding: 0.2rem;
+    box-shadow: var(--shadow-elevation-medium);
+    transition: padding-bottom 0.2s ease-in-out;
+}
+
+.hour-card.expanded {
+    padding-bottom: 2rem;
+}
+
+.hour-card-extension,
+.hour-card-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.hour-card-main {
+    position: relative;
+    background-color: inherit;
+    border-radius: inherit;
+    z-index: 2;
+}
+
+.hour-card-extension {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    opacity: 0;
+    transition: top 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.hour-card.expanded .hour-card-extension {
+    top: calc(100% - 2rem);
+    opacity: 1;
+}
+
+.hour-card-extension>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hour-card-extension>div>h5 {
+    padding-left: 0.3rem;
+}
+
+.hour-card-weather-icon {
+    width: 35px;
+    height: 35px;
+}
+
+.hour-card-icon {
+    width: 28px;
+    height: 28px;
+}
+
+/*today container/*/
+
 @media screen and (max-width:790px) {
     #current-container {
         position: relative;
