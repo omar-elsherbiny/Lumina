@@ -4,6 +4,8 @@ const currentContainer = document.getElementById('current-container');
 const infoContainer = document.getElementById('info-container');
 const searchInput = document.getElementById('search-input');
 const autocompleteBox = document.getElementById('autocomplete-box');
+const locationOff = document.getElementById('location-off');
+const locationOn = document.getElementById('location-on');
 
 const date = document.querySelectorAll('#date .digit');
 const time = document.querySelectorAll('#time .digit');
@@ -116,6 +118,35 @@ unitToggle.addEventListener('click', function () {
 });
 // unit switch
 
+function getLocation(search) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                if (search) {
+                    searchLocation(`${position.coords.latitude}, ${position.coords.longitude}`).then(location => {
+                        applyNewWeatherData(location);
+                        searchInput.value = location;
+                        prev_query = location;
+                    });
+                }
+                locationOff.classList.add('hide');
+                locationOn.classList.remove('hide');
+            },
+            (error) => {
+                locationOff.classList.remove('hide');
+                locationOn.classList.add('hide');
+                console.error(error);
+            }
+        );
+    } else {
+        locationOff.classList.remove('hide');
+        locationOn.classList.add('hide');
+        console.error("Geolocation is not supported by this browser.");
+    }
+}
+
+// current location
+
 function getScrollPercentage(element) {
     const { scrollHeight, clientHeight, scrollTop } = element;
     const scrolledPortion = scrollHeight - clientHeight - scrollTop;
@@ -123,16 +154,16 @@ function getScrollPercentage(element) {
     return 1 - Math.max(Math.min(scrollPerc, 1), 0);
 }
 
-function lerp(a, b, moon_desc, capped = true) {
+function lerp(a, b, t, capped = true) {
     if (capped) {
-        moon_desc = Math.max(Math.min(moon_desc, 1), 0);
+        t = Math.max(Math.min(t, 1), 0);
     }
-    return ((1 - moon_desc) * a + moon_desc * b).toFixed(1);
+    return ((1 - t) * a + t * b).toFixed(1);
 }
 
 function updateInfoContainer() {
-    let moon_desc = getScrollPercentage(infoContainer);
-    root.style.setProperty('--day-info-opacity', lerp(100, 0, moon_desc) + '%');
+    let t = getScrollPercentage(infoContainer);
+    root.style.setProperty('--day-info-opacity', lerp(100, 0, t) + '%');
 }
 
 infoContainer.addEventListener('scroll', updateInfoContainer);
@@ -486,26 +517,6 @@ if (navigator.userAgent.includes('Firefox')) {
     document.querySelectorAll('.scroll').forEach(element => {
         element.classList.add('scroll-moz');
     });
-}
-
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            searchLocation(`${position.coords.latitude}, ${position.coords.longitude}`).then(location => {
-                let timeout = setTimeout(() => {
-                    applyNewWeatherData(location);
-                    searchInput.value = location;
-                    prev_query = location;
-                    clearTimeout(timeout);
-                }, 1000);
-            });
-        },
-        (error) => {
-            console.error(error);
-        }
-    );
-} else {
-    console.error("Geolocation is not supported by this browser.");
 }
 
 updateInfoContainer();

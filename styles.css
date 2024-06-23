@@ -228,6 +228,18 @@ nav>div {
     width: 7rem;
 }
 
+#location-on,
+#location-off {
+    padding-right: 0.5rem;
+    cursor: pointer;
+    transition: scale 0.2s ease-in-out;
+}
+
+#location-on:hover,
+#location-off:hover {
+    scale: 1.1;
+}
+
 #title {
     font-family: 'Josefin Sans';
     font-weight: 500;

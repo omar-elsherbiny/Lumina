@@ -18,6 +18,21 @@
     <nav>
         <h1 id="title">Lumina</h1>
         <div>
+            <svg id="location-off" class="hide" onclick="getLocation(false)" xmlns="http://www.w3.org/2000/svg"
+                width="28" height="28" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5">
+                    <path d="m4 4l16 16" />
+                    <path stroke-linejoin="round"
+                        d="M6.023 6.022A7.779 7.779 0 0 0 6.5 16.5L12 22l5-5M9.344 3.687a7.78 7.78 0 0 1 9.969 9.969" />
+                </g>
+            </svg>
+            <svg id="location-on" onclick="getLocation(true)" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linejoin="round">
+                    <path stroke-width="3.75" d="M12 11h.01v.01H12z" />
+                    <path stroke-width="2.5" d="m12 22l5.5-5.5a7.778 7.778 0 1 0-11 0z" />
+                </g>
+            </svg>
             <input type="checkbox" id="unit-toggle" class="toggle">
             <label for="unit-toggle"><input type="checkbox" id="unit-toggle" class="toggle"></label>
             <input type="checkbox" id="theme-toggle" class="toggle">
