@@ -597,6 +597,15 @@ footer {
     margin-top: 0.8rem;
 }
 
+#extended-night-info .value .clock-digit-container p {
+    font-size: 10pt;
+}
+
+#extended-night-info .value .clock-digit-container .digit {
+    height: 10pt;
+}
+
+
 .daycycle-bar::before,
 .daycycle-bar::after {
     content: '';

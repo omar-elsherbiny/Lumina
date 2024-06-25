@@ -213,10 +213,11 @@ let is_day = 1;
 async function applyNewWeatherData(location) {
     wd = await getWeather(location);
     let cu = document.documentElement.getAttribute('data-unit'); // current unit
+    let cf = document.documentElement.getAttribute('data-format'); // current time format
     console.log(wd);
 
     let [cDate, cTime] = wd.location.localtime.split(' ');
-    setClock(time, timeToArr(cTime));
+    setClock(time, timeToArr(cTime, cf));
     setClock(date, dateToArr(cDate));
 
     if (is_day != wd.current.is_day) {
@@ -255,10 +256,10 @@ async function applyNewWeatherData(location) {
     setClock(moonLumin, numToArr(astro.moon_illumination));
 
     setClock(visibility, numToArr(wd.current.vis_km, 2));
-    setClock(sunrise, timeToArr(astro.sunrise));
-    setClock(sunset, timeToArr(astro.sunset));
-    setClock(moonrise, timeToArr(astro.moonrise));
-    setClock(moonset, timeToArr(astro.moonset));
+    setClock(sunrise, timeToArr(astro.sunrise, cf));
+    setClock(sunset, timeToArr(astro.sunset, cf));
+    setClock(moonrise, timeToArr(astro.moonrise, cf));
+    setClock(moonset, timeToArr(astro.moonset, cf));
 
     setBarGradient(astro.sunrise, astro.sunset, astro.moonrise, astro.moonset);
     root.style.setProperty('--bar-selector-perc', timeToRatio(cTime))
@@ -439,7 +440,7 @@ function dateToArr(dateString) {
     return res;
 }
 
-function timeToArr(timeString) {
+function timeToArr(timeString, format) {
     const [hourString, minutes, meridian] = timeString.replace(' ', ':').split(':');
     let hour = parseInt(hourString, 10);
     if (meridian === 'PM' && hour !== 12) {
@@ -447,9 +448,13 @@ function timeToArr(timeString) {
     } else if (meridian === 'AM' && hour === 12) {
         hour = 0;
     }
+    const unit = format == '24' ? ' ' : (hour > 12 ? 'pm' : 'am');
+    if (format == '12' && hour > 12) {
+        hour -= 12;
+    }
     const hour24 = hour.toString().padStart(2, ' ');
     const minutes24 = minutes.padStart(2, '0');
-    return [hour24[0], ...hour24.slice(1), ...minutes24.split('')];
+    return [hour24[0], ...hour24.slice(1), ...minutes24.split(''), unit];
 }
 
 function numToArr(num, pad = 3, padder = ' ') {
