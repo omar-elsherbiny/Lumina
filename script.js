@@ -300,7 +300,7 @@ async function applyNewWeatherData(location) {
                 <div class="hour-card-val clock-digit-container">
                     <div class="digit">
                         <p class="current">${index.toString().padStart(2, '0')}:00</p>
-                        <p>${index}${index > 12 ? 'pm' : 'am'}</p>
+                        <p>${index==0?12:index}${index > 12 ? 'pm' : 'am'}</p>
                     </div>
                 </div>
                 <div class="hour-card-temp clock-digit-container">
