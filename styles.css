@@ -802,6 +802,27 @@ footer {
 
     #today-container {
         order: 2;
+        min-height: fit-content;
+    }
+
+    #hour-card-container {
+        overflow-y: scroll;
+        scroll-snap-type: x mandatory;
+        flex-direction: row;
+        justify-content: start;
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.9rem, rgba(0, 0, 0, 1) calc(100% - 1.8rem), rgba(0, 0, 0, 0) 100%);
+        -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.9rem, rgba(0, 0, 0, 1) calc(100% - 1.8rem), rgba(0, 0, 0, 0) 100%);
+    }
+
+    .hour-card {
+        scroll-snap-align: center;
+        min-width: 12rem;
+        padding-bottom: 2rem;
+    }
+
+    .hour-card .hour-card-extension {
+        top: calc(100% - 2rem);
+        opacity: 1;
     }
 
     #forcast-container {
@@ -814,14 +835,14 @@ footer {
 
     main {
         overflow-y: scroll;
-        scroll-snap-type: y mandatory;
+        scroll-snap-type: y proximity;
         padding: 0;
         justify-content: start;
         flex-direction: column;
     }
 
     section {
-        scroll-snap-align: start;
+        scroll-snap-align: center;
         min-width: 100%;
         min-height: 100%;
     }
