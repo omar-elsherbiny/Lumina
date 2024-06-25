@@ -34,7 +34,7 @@
     --bar-daylight: #34a5cb;
     --bar-moonlight: #192c67;
     --bar-darknight: #1a1a1a;
-    --bar-gap-perc: 6%;
+    --bar-gap-perc: 5%;
     --bar-sunrise: 100%;
     --bar-sunset: 0%;
     --bar-moonrise: 0%;
@@ -200,6 +200,14 @@ input[type="checkbox"].toggle:checked+label::after {
 
 #unit-toggle.toggle:checked+label::after {
     background-image: url('https://api.iconify.design/mdi:temperature-fahrenheit.svg?color=%23fffefa');
+}
+
+#format-toggle.toggle+label::after {
+    background-image: url('https://api.iconify.design/tabler:clock-24.svg?color=%2308081a');
+}
+
+#format-toggle.toggle:checked+label::after {
+    background-image: url('https://api.iconify.design/tabler:clock-12.svg?color=%23fffefa');
 }
 
 nav {
@@ -397,7 +405,8 @@ footer {
     align-items: center;
     justify-content: start;
     flex-direction: column;
-    width: 100%;
+    width: calc(100% - 0.5rem);
+    padding-left: 0.25rem;
 }
 
 #search-container>div {

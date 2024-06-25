@@ -118,6 +118,28 @@ unitToggle.addEventListener('click', function () {
 });
 // unit switch
 
+let formatToggle = document.getElementById('format-toggle');
+let storedFormat = localStorage.getItem('format') || '24';
+if (storedFormat) {
+    document.documentElement.setAttribute('data-format', storedFormat);
+    if (storedFormat === '12') {
+        formatToggle.checked = true;
+    }
+    else {
+        formatToggle.checked = false;
+    }
+}
+formatToggle.addEventListener('click', function () {
+    let currentFormat = document.documentElement.getAttribute('data-format');
+    let targetFormat = '24';
+    if (currentFormat === '24') {
+        targetFormat = '12';
+    }
+    document.documentElement.setAttribute('data-format', targetFormat);
+    localStorage.setItem('format', targetFormat);
+});
+// time format switch
+
 function getLocation(search) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -359,7 +381,6 @@ async function applyNewWeatherData(location) {
     let timeout = setTimeout(() => {
         setClock(Array.from(hourCardContainer.children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
         clearTimeout(timeout);
-        console.log('niggas');
     }, 500);
     hourCardContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
 }
