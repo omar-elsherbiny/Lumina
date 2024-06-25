@@ -21,6 +21,7 @@ const windDirIcon = document.getElementById('wind-dir-icon');
 const clouds = document.querySelectorAll('#clouds .digit');
 const rain = document.querySelectorAll('#rain .digit');
 const snow = document.querySelectorAll('#snow .digit');
+const totalSnow = document.querySelectorAll('#total-snow .digit');
 const nightMoonIcon = document.querySelectorAll('#night-moon-icon svg');
 const moonDesc = document.getElementById('moon-desc');
 const moonLumin = document.querySelectorAll('#moon-lumin .digit');
@@ -148,7 +149,7 @@ formatToggle.addEventListener('click', function () {
         setClock(moonrise, timeToArr(astro.moonrise, targetFormat));
         setClock(moonset, timeToArr(astro.moonset, targetFormat));
 
-        document.querySelectorAll('.hour-card-val').forEach((time, index) => {
+        document.querySelectorAll('.hour-card-val').forEach(time => {
             setClock(Array.from(time.querySelectorAll('.hour-card-val .digit')), [time.querySelectorAll('.hour-card-val .digit p')[targetFormat == '24' ? 0 : 1].textContent]);
         });
     }
@@ -264,6 +265,7 @@ async function applyNewWeatherData(location) {
     setClock(clouds, numToArr(wd.current.cloud));
     setClock(rain, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_rain));
     setClock(snow, numToArr(wd.forecast.forecastday[0].day.daily_chance_of_snow));
+    setClock(totalSnow, tempToArr(wd.forecast.forecastday[0].day.totalsnow_cm));
 
     let astro = wd.forecast.forecastday[0].astro;
     setMoon(astro.moon_phase, astro.moon_illumination);
@@ -393,6 +395,15 @@ async function applyNewWeatherData(location) {
                             d="M12.004 19L12 14m4.004 7L16 16m-7.996 1L8 12m11.825 5c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
                     </svg>
                     <h5 class="hour-card-rain">${hour.chance_of_rain}%</h5>
+                </div>
+                <div>
+                    <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                        viewBox="0 0 24 24">
+                        <path fill="none" stroke="url(#grad7)" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="1.5"
+                            d="M12.004 17.5L12 17m4.004-1.5L16 15m-7.996.5L8 15m4.004 6L12 20.5m4.004-1.5L16 18.5m-7.996.5L8 18.5M19.825 17c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                    </svg>
+                    <h5 class="hour-card-snow">${hour.chance_of_snow}%</h5>
                 </div>
             </div>`
             hourCardContainer.appendChild(element);
