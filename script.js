@@ -137,6 +137,21 @@ formatToggle.addEventListener('click', function () {
     }
     document.documentElement.setAttribute('data-format', targetFormat);
     localStorage.setItem('format', targetFormat);
+
+    if (wd != null) {
+        setClock(time, timeToArr(wd.location.localtime.split(' ')[1], targetFormat));
+
+        let astro = wd.forecast.forecastday[0].astro;
+        setClock(visibility, numToArr(wd.current.vis_km, 2));
+        setClock(sunrise, timeToArr(astro.sunrise, targetFormat));
+        setClock(sunset, timeToArr(astro.sunset, targetFormat));
+        setClock(moonrise, timeToArr(astro.moonrise, targetFormat));
+        setClock(moonset, timeToArr(astro.moonset, targetFormat));
+
+        document.querySelectorAll('.hour-card-val').forEach((time, index) => {
+            setClock(Array.from(time.querySelectorAll('.hour-card-val .digit')), [time.querySelectorAll('.hour-card-val .digit p')[targetFormat == '24' ? 0 : 1].textContent]);
+        });
+    }
 });
 // time format switch
 
