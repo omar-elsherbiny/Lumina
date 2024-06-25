@@ -280,7 +280,12 @@ async function applyNewWeatherData(location) {
             element.style.backgroundColor = `var(--card-bgr-${hour.is_day ? 'day' : 'night'})`;
             element.innerHTML = `
             <div class="hour-card-main">
-                <h5 class="hour-card-val">${index.toString().padStart(2, '0')}:00</h5>
+                <div class="hour-card-val clock-digit-container">
+                    <div class="digit">
+                        <p class="current">${index.toString().padStart(2, '0')}:00</p>
+                        <p>${index}${index > 12 ? 'pm' : 'am'}</p>
+                    </div>
+                </div>
                 <div class="hour-card-temp clock-digit-container">
                     <div class="digit">
                         <p class="current">-</p>
@@ -377,12 +382,14 @@ async function applyNewWeatherData(location) {
             </div>`
             hourCardContainer.appendChild(element);
             setClock(Array.from(element.querySelectorAll('.hour-card-temp .digit')), tempToArr(hour[`temp_${cu}`], cu));
+            setClock(Array.from(element.querySelectorAll('.hour-card-val .digit')), [element.querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
         });
+        let timeout = setTimeout(() => {
+            setClock(Array.from(hourCardContainer.children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
+            setClock(Array.from(hourCardContainer.children[0].querySelectorAll('.hour-card-val .digit')), [hourCardContainer.children[0].querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
+            clearTimeout(timeout);
+        }, 500);
     }
-    let timeout = setTimeout(() => {
-        setClock(Array.from(hourCardContainer.children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
-        clearTimeout(timeout);
-    }, 500);
     hourCardContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
 }
 

@@ -310,7 +310,7 @@ main {
     background: linear-gradient(to top left, var(--main-trans));
     backdrop-filter: blur(1rem);
     -webkit-backdrop-filter: blur(1rem);
-    box-shadow: var(--shadow-elevation-low);
+    box-shadow: var(--shadow-elevation-medium);
 }
 
 section {
