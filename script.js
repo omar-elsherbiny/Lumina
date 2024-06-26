@@ -31,7 +31,9 @@ const sunset = document.querySelectorAll('#sunset .digit');
 const moonrise = document.querySelectorAll('#moonrise .digit');
 const moonset = document.querySelectorAll('#moonset .digit');
 
+const todayContainer = document.getElementById('today-container');
 const todayHourContainer = document.querySelector('#today-container .hour-card-container');
+const altCurrentContainer = document.getElementById('alt-current-container');
 
 async function getWeather(location) {
     try {
@@ -577,6 +579,27 @@ function setMoon(moon_desc, moon_illum) {
     nightMoonIcon[ind].style.top = '0';
 }
 // moon svg
+
+function onForcastClick(dayIndex) {
+    let query = getComputedStyle(root).getPropertyValue('--media-query');
+    if (query == 0) {
+        if (currentContainer.style.transform == '') {
+            currentContainer.style.transform = 'translateX(100%)';
+            todayContainer.style.transitionDelay = '0s';
+            todayContainer.style.opacity = '0';
+            altCurrentContainer.style.transitionDelay = '1s';
+            altCurrentContainer.style.opacity = '1';
+        } else {
+            currentContainer.style.transform = '';
+            todayContainer.style.transitionDelay = '1s';
+            todayContainer.style.opacity = '1';
+            altCurrentContainer.style.transitionDelay = '0s';
+            altCurrentContainer.style.opacity = '0';
+        }
+    }
+}
+
+// forcast functionality
 
 if (navigator.userAgent.includes('Firefox')) {
     document.querySelectorAll('.scroll').forEach(element => {

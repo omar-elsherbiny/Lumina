@@ -41,6 +41,7 @@
     --bar-moonset: 0%;
     --bar-selector-perc: 50%;
     --text3: #e6e6e6;
+    --media-query: 0;
 }
 
 :root[data-theme="light"] {
@@ -380,7 +381,8 @@ footer {
     flex-direction: column;
     border-radius: 1rem;
     padding: 0.2rem;
-    transition: transform 1s cubic-bezier(.5, 0, .2, 1);
+    transition: transform 1s 0.2s cubic-bezier(.5, 0, .2, 1);
+    z-index: 3;
 }
 
 #current-container::before {
@@ -652,6 +654,15 @@ footer {
     padding: 0.2rem 0;
 }
 
+#alt-current-container,
+#today-container {
+    transition: opacity 0.5s ease-in-out;
+}
+
+#alt-current-container {
+    opacity: 0;
+}
+
 #forcast-container>h4,
 #today-container>h4 {
     text-align: center;
@@ -814,7 +825,12 @@ footer {
     margin: 0.4rem;
     box-shadow: var(--shadow-elevation-medium);
     cursor: pointer;
+    animation: fade-in 0.3s ease-in-out;
     transition: scale 0.2s ease-in-out;
+}
+
+.forcast-card:nth-child(2) {
+    animation-delay: 90ms;
 }
 
 .forcast-card:hover {
@@ -860,6 +876,10 @@ footer {
 /*today container, forcast-container/*/
 
 @media screen and (max-width:790px) {
+    :root {
+        --media-query: 1;
+    }
+
     #current-container {
         position: relative;
         order: 1;
@@ -871,7 +891,7 @@ footer {
 
     #today-container {
         order: 2;
-        min-height: fit-content;
+        min-height: 9rem;
     }
 
     .hour-card-container {
@@ -919,6 +939,10 @@ footer {
 }
 
 @media screen and (max-width:426px) {
+    :root {
+        --media-query: 2;
+    }
+
     nav {
         padding: 0 0.5rem;
         width: calc(100% - 1rem);
