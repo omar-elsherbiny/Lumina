@@ -31,7 +31,7 @@ const sunset = document.querySelectorAll('#sunset .digit');
 const moonrise = document.querySelectorAll('#moonrise .digit');
 const moonset = document.querySelectorAll('#moonset .digit');
 
-const hourCardContainer = document.getElementById('hour-card-container');
+const todayHourContainer = document.querySelector('#today-container .hour-card-container');
 
 async function getWeather(location) {
     try {
@@ -283,7 +283,8 @@ async function applyNewWeatherData(location) {
 
     if (!areObjectsDeepEqual(hourData, wd.forecast.forecastday[0].hour)) {
         hourData = wd.forecast.forecastday[0].hour;
-        hourCardContainer.innerHTML = '';
+        todayHourContainer
+            .innerHTML = '';
         hourData.forEach((hour, index) => {
             let element = document.createElement('div');
             element.classList.add('hour-card');
@@ -300,7 +301,7 @@ async function applyNewWeatherData(location) {
                 <div class="hour-card-val clock-digit-container">
                     <div class="digit">
                         <p class="current">${index.toString().padStart(2, '0')}:00</p>
-                        <p>${index==0?12:index}${index > 12 ? 'pm' : 'am'}</p>
+                        <p>${index == 0 ? 12 : index}${index > 12 ? 'pm' : 'am'}</p>
                     </div>
                 </div>
                 <div class="hour-card-temp clock-digit-container">
@@ -406,17 +407,22 @@ async function applyNewWeatherData(location) {
                     <h5 class="hour-card-snow">${hour.chance_of_snow}%</h5>
                 </div>
             </div>`
-            hourCardContainer.appendChild(element);
+            todayHourContainer
+                .appendChild(element);
             setClock(Array.from(element.querySelectorAll('.hour-card-temp .digit')), tempToArr(hour[`temp_${cu}`], cu));
             setClock(Array.from(element.querySelectorAll('.hour-card-val .digit')), [element.querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
         });
         let timeout = setTimeout(() => {
-            setClock(Array.from(hourCardContainer.children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
-            setClock(Array.from(hourCardContainer.children[0].querySelectorAll('.hour-card-val .digit')), [hourCardContainer.children[0].querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
+            setClock(Array.from(todayHourContainer
+                .children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
+            setClock(Array.from(todayHourContainer
+                .children[0].querySelectorAll('.hour-card-val .digit')), [todayHourContainer
+                    .children[0].querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
             clearTimeout(timeout);
         }, 500);
     }
-    hourCardContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
+    todayHourContainer
+        .children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
 }
 
 function confirmAutocomplete(searchIndex) {

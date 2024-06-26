@@ -642,7 +642,8 @@ footer {
 /*info container/*/
 /*current container/*/
 
-/*today container*/
+/*today container, forcast-container*/
+#forcast-container,
 #today-container {
     position: relative;
     box-sizing: border-box;
@@ -651,6 +652,7 @@ footer {
     padding: 0.2rem 0;
 }
 
+#forcast-container>h4,
 #today-container>h4 {
     text-align: center;
     text-decoration: underline;
@@ -659,7 +661,7 @@ footer {
     padding-top: 0.2rem;
 }
 
-#hour-card-container {
+.hour-card-container {
     flex: 1;
     display: flex;
     align-items: center;
@@ -780,15 +782,71 @@ footer {
     height: 20px;
 }
 
+.forcast-card-temp.clock-digit-container p,
 .hour-card-temp.clock-digit-container p {
     font-size: 11.2pt;
 }
 
+.forcast-card-temp.clock-digit-container .digit,
 .hour-card-temp.clock-digit-container .digit {
     font-size: 11.2pt;
 }
 
-/*today container/*/
+#forcast-container>div {
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+.forcast-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: clamp(12rem, 70%, 100%);
+    height: fit-content;
+    background-color: var(--card-bgr-day);
+    border-radius: 1rem;
+    margin: 0.4rem;
+    box-shadow: var(--shadow-elevation-medium);
+    cursor: pointer;
+}
+
+.forcast-card>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex: 1;
+}
+
+.forcast-card>div>h4 {
+    text-align: center;
+}
+
+.forcast-data>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.forcast-data>div>h5 {
+    font-weight: 600;
+    font-size: 10pt;
+    padding-left: 0.2rem;
+}
+
+.forcast-card-weather-icon {
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+}
+
+.forcast-card-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/*today container, forcast-container/*/
 
 @media screen and (max-width:790px) {
     #current-container {
@@ -805,7 +863,7 @@ footer {
         min-height: fit-content;
     }
 
-    #hour-card-container {
+    .hour-card-container {
         overflow-y: scroll;
         scroll-snap-type: x mandatory;
         flex-direction: row;
