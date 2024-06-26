@@ -685,6 +685,11 @@ footer {
     animation: linear fly-in-and-out;
     animation-timeline: view();
     opacity: 0;
+    transition: scale 0.2s ease-in-out;
+}
+
+.hour-card:hover {
+    scale: 1.02;
 }
 
 @keyframes fade-in {
@@ -803,11 +808,17 @@ footer {
     flex-direction: column;
     width: clamp(12rem, 70%, 100%);
     height: fit-content;
+    max-height: 10rem;
     background-color: var(--card-bgr-day);
     border-radius: 1rem;
     margin: 0.4rem;
     box-shadow: var(--shadow-elevation-medium);
     cursor: pointer;
+    transition: scale 0.2s ease-in-out;
+}
+
+.forcast-card:hover {
+    scale: 1.02;
 }
 
 .forcast-card>div {
@@ -885,6 +896,7 @@ footer {
 
     #forcast-container {
         order: 3;
+        min-height: 9rem;
     }
 
     #alt-current-container {
