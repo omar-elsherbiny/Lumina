@@ -120,6 +120,13 @@ unitToggle.addEventListener('click', function () {
             let hour = wd.forecast.forecastday[0].hour[index];
             setClock(temp.querySelectorAll('.digit'), tempToArr(hour[`temp_${targetUnit}`], targetUnit));
         });
+        document.querySelectorAll('#alt-current-container .hour-card-temp').forEach((temp, index) => {
+            let hour = wd.forecast.forecastday[setDayIndex].hour[index];
+            setClock(temp.querySelectorAll('.digit'), tempToArr(hour[`temp_${targetUnit}`], targetUnit));
+        });
+
+        setClock(document.querySelectorAll('.forcast-card-temp')[0].querySelectorAll('.digit'), tempToArr(tomorrowData.day['avgtemp_' + targetUnit], targetUnit));
+        setClock(document.querySelectorAll('.forcast-card-temp')[1].querySelectorAll('.digit'), tempToArr(afterTomorrowData.day['avgtemp_' + targetUnit], targetUnit));
     }
 });
 // unit switch
