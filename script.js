@@ -314,7 +314,7 @@ async function applyNewWeatherData(location) {
                 <div class="hour-card-val clock-digit-container">
                     <div class="digit">
                         <p class="current">${index.toString().padStart(2, '0')}:00</p>
-                        <p>${index == 0 ? 12 : index}${index > 12 ? 'pm' : 'am'}</p>
+                        <p>${index == 0 ? 12 : (index > 12 ? index - 12 : index)}${index >= 12 ? 'pm' : 'am'}</p>
                     </div>
                 </div>
                 <div class="hour-card-temp clock-digit-container">
@@ -378,7 +378,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="hour-card-weather-icon">
-                    <img width="100%" height="100%"
+                    <img width="64" height="64"
                         src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
                 </div>
             </div>
@@ -500,7 +500,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="forcast-card-weather-icon">
-                    <img width="100%" height="100%"
+                    <img width="64" height="64"
                         src="https:${tomorrowData.day.condition.icon}"
                         alt="Forcast Weather Icon"></img>
                 </div>
@@ -599,7 +599,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="forcast-card-weather-icon">
-                    <img width="100%" height="100%"
+                    <img width="64" height="64"
                         src="https:${afterTomorrowData.day.condition.icon}"
                         alt="Forcast Weather Icon"></img>
                 </div>
@@ -856,7 +856,7 @@ function onForcastClick(dayIndex, animate = true) {
                     <div class="hour-card-val clock-digit-container">
                         <div class="digit">
                             <p class="current">${index.toString().padStart(2, '0')}:00</p>
-                            <p>${index == 0 ? 12 : index}${index > 12 ? 'pm' : 'am'}</p>
+                            <p>${index == 0 ? 12 : (index > 12 ? index - 12 : index)}${index >= 12 ? 'pm' : 'am'}</p>
                         </div>
                     </div>
                     <div class="hour-card-temp clock-digit-container">
@@ -920,7 +920,7 @@ function onForcastClick(dayIndex, animate = true) {
                         </div>
                     </div>
                     <div class="hour-card-weather-icon">
-                        <img width="100%" height="100%"
+                        <img width="64" height="64"
                             src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
                     </div>
                 </div>
