@@ -431,6 +431,10 @@ async function applyNewWeatherData(location) {
         }, 500);
     }
     todayHourContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
+    let timeout = setTimeout(() => {
+        todayHourContainer.children[parseInt(cTime.substring(0, 2))].scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        clearTimeout(timeout);
+    }, 24 * 90)
 
     if (!areObjectsDeepEqual(tomorrowData, wd.forecast.forecastday[1]) || !areObjectsDeepEqual(afterTomorrowData, wd.forecast.forecastday[2])) {
         tomorrowData = wd.forecast.forecastday[1];
