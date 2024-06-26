@@ -177,6 +177,7 @@ function getLocation(search) {
                         applyNewWeatherData(location);
                         searchInput.value = location;
                         prev_query = location;
+                        localStorage.setItem('prev_query', prev_query);
                     });
                 }
                 locationOff.classList.add('hide');
@@ -656,6 +657,7 @@ function confirmAutocomplete(searchIndex) {
     document.activeElement.blur();
     searchInput.value = searches[searchIndex];
     prev_query = searches[searchIndex];
+    localStorage.setItem('prev_query', prev_query);
     autocompleteBox.style.opacity = '0';
     let timeout = setTimeout(() => {
         autocompleteBox.innerHTML = '';
@@ -682,7 +684,7 @@ async function updateAutocomplete(e) {
 }
 
 searchInput.addEventListener('keyup', e => updateAutocomplete(e));
-let prev_query = '';
+let prev_query = localStorage.getItem('prev_query') || '';
 searchInput.addEventListener('focus', e => {
     searchInput.value = '';
     autocompleteBox.style.opacity = '0';
@@ -995,6 +997,11 @@ function getDelayUntilNextMinute() {
     const milliseconds = now.getMilliseconds();
     return (60 * 1000) - (seconds * 1000 + milliseconds);
 }
+
+let timeout = setTimeout(() => {
+    searchInput.value = prev_query;
+    applyNewWeatherData(prev_query);
+}, 1000);
 
 setTimeout(function () {
     if (prev_query != '') {
