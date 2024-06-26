@@ -378,7 +378,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="hour-card-weather-icon">
-                    <img width="64" height="64"
+                    <img width="100%" height="100%"
                         src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
                 </div>
             </div>
@@ -500,7 +500,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="forcast-card-weather-icon">
-                    <img width="64" height="64"
+                    <img width="100%" height="100%"
                         src="https:${tomorrowData.day.condition.icon}"
                         alt="Forcast Weather Icon"></img>
                 </div>
@@ -599,7 +599,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="forcast-card-weather-icon">
-                    <img width="64" height="64"
+                    <img width="100%" height="100%"
                         src="https:${afterTomorrowData.day.condition.icon}"
                         alt="Forcast Weather Icon"></img>
                 </div>
@@ -920,7 +920,7 @@ function onForcastClick(dayIndex, animate = true) {
                         </div>
                     </div>
                     <div class="hour-card-weather-icon">
-                        <img width="64" height="64"
+                        <img width="100%" height="100%"
                             src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
                     </div>
                 </div>
