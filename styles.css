@@ -663,6 +663,7 @@ footer {
     opacity: 0;
 }
 
+#alt-current-container>h4,
 #forcast-container>h4,
 #today-container>h4 {
     text-align: center;
@@ -821,6 +822,7 @@ footer {
     width: clamp(12rem, 70%, 100%);
     height: fit-content;
     max-height: 10rem;
+    padding-bottom: 0.2rem;
     background-color: var(--card-bgr-day);
     border-radius: 1rem;
     margin: 0.4rem;
@@ -831,7 +833,7 @@ footer {
 }
 
 .forcast-card:nth-child(2) {
-    animation-delay: 90ms;
+    animation-duration: 0.5s;
 }
 
 .forcast-card:hover {
@@ -884,6 +886,7 @@ footer {
     #current-container {
         position: relative;
         order: 1;
+        transform: translateX(0%) !important;
     }
 
     #current-container::before {
@@ -920,8 +923,14 @@ footer {
         min-height: 9rem;
     }
 
+    #forcast-container>div {
+        flex-wrap: wrap;
+    }
+
     #alt-current-container {
         order: 4;
+        min-height: 9rem;
+        opacity: 1;
     }
 
     main {

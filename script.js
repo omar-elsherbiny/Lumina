@@ -33,8 +33,10 @@ const moonset = document.querySelectorAll('#moonset .digit');
 
 const todayContainer = document.getElementById('today-container');
 const todayHourContainer = document.querySelector('#today-container .hour-card-container');
+const forcastContainer = document.querySelector('#forcast-container .hour-card-container');
 const altCurrentContainer = document.getElementById('alt-current-container');
 const altHourContainer = document.querySelector('#alt-current-container .hour-card-container');
+const altContainerTitle = document.querySelector('#alt-current-container h4');
 
 async function getWeather(location) {
     try {
@@ -420,6 +422,208 @@ async function applyNewWeatherData(location) {
         }, 500);
     }
     todayHourContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
+
+    forcastContainer.innerHTML = `
+    <div class="forcast-card" onclick="onForcastClick(1)">
+        <div>
+            <h4>Tomorrow</h4>
+            <div class="forcast-card-temp clock-digit-container">
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <p>.</p>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>°C</p>
+                    <p>°F</p>
+                </div>
+            </div>
+            <div class="forcast-card-weather-icon">
+                <img width="100%" height="100%"
+                    src="https://cdn.weatherapi.com/weather/128x128/day/113.png"
+                    alt="Forcast Weather Icon"></img>
+            </div>
+        </div>
+        <div class="forcast-data">
+            <div>
+                <svg class="forcast-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad2)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.495 3c3.58 3.56 9.345 7.602 6.932 13.397C18.275 19.163 15.492 21 12.5 21c-2.992 0-5.775-1.837-6.927-4.603C3.161 10.607 8.919 6.561 12.495 3" />
+                </svg>
+                <h5 class="forcast-card-humidity">100%</h5>
+            </div>
+            <div>
+                <svg class="forcast-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad6)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.004 19L12 14m4.004 7L16 16m-7.996 1L8 12m11.825 5c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                </svg>
+                <h5 class="forcast-card-rain">100%</h5>
+            </div>
+            <div>
+                <svg class="forcast-card-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad7)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.004 17.5L12 17m4.004-1.5L16 15m-7.996.5L8 15m4.004 6L12 20.5m4.004-1.5L16 18.5m-7.996.5L8 18.5M19.825 17c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                </svg>
+                <h5 class="forcast-card-snow">100%</h5>
+            </div>
+        </div>
+    </div>
+    <div class="forcast-card" onclick="onForcastClick(2)">
+        <div>
+            <h4>After Tomorrow</h4>
+            <div class="forcast-card-temp clock-digit-container">
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <p>.</p>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>0</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                </div>
+                <div class="digit">
+                    <p class="current">-</p>
+                    <p>°C</p>
+                    <p>°F</p>
+                </div>
+            </div>
+            <div class="forcast-card-weather-icon">
+                <img width="100%" height="100%"
+                    src="https://cdn.weatherapi.com/weather/128x128/day/113.png"
+                    alt="Forcast Weather Icon"></img>
+            </div>
+        </div>
+        <div class="forcast-data">
+            <div>
+                <svg class="forcast-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad2)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.495 3c3.58 3.56 9.345 7.602 6.932 13.397C18.275 19.163 15.492 21 12.5 21c-2.992 0-5.775-1.837-6.927-4.603C3.161 10.607 8.919 6.561 12.495 3" />
+                </svg>
+                <h5 class="forcast-card-humidity">100%</h5>
+            </div>
+            <div>
+                <svg class="forcast-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad6)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.004 19L12 14m4.004 7L16 16m-7.996 1L8 12m11.825 5c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                </svg>
+                <h5 class="forcast-card-rain">100%</h5>
+            </div>
+            <div>
+                <svg class="forcast-card-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="url(#grad7)" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5"
+                        d="M12.004 17.5L12 17m4.004-1.5L16 15m-7.996.5L8 15m4.004 6L12 20.5m4.004-1.5L16 18.5m-7.996.5L8 18.5M19.825 17c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                </svg>
+                <h5 class="forcast-card-snow">100%</h5>
+            </div>
+        </div>
+    </div>
+    `
+    onForcastClick(setDayIndex==null?1:setDayIndex,false);
 }
 
 function confirmAutocomplete(searchIndex) {
@@ -575,12 +779,13 @@ function setMoon(moon_desc, moon_illum) {
 }
 // moon svg
 
+let panelTransformed=0;
 let setDayIndex = null;
-function onForcastClick(dayIndex) {
+function onForcastClick(dayIndex, animate=true) {
     if (wd == null) return;
     let query = getComputedStyle(root).getPropertyValue('--media-query');
     if (setDayIndex == dayIndex) {
-        if (query == 0) {
+        if (query == 0 && animate) {
             if (panelTransformed) {
                 currentContainer.style.transform = '';
                 todayContainer.style.transitionDelay = '1s';
@@ -598,7 +803,8 @@ function onForcastClick(dayIndex) {
             }
         }
     } else {
-        if (query == 0) {
+        altContainerTitle.textContent = document.querySelectorAll('.forcast-card')[dayIndex - 1].querySelector('h4').textContent;
+        if (query == 0 && animate) {
             currentContainer.style.transform = 'translateX(100%)';
             todayContainer.style.transitionDelay = '0s';
             todayContainer.style.opacity = '0';
