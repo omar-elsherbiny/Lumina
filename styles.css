@@ -244,11 +244,6 @@ nav>div {
     transition: scale 0.2s ease-in-out;
 }
 
-#location-on:hover,
-#location-off:hover {
-    scale: 1.1;
-}
-
 #title {
     font-family: 'Josefin Sans';
     font-weight: 500;
@@ -457,10 +452,6 @@ footer {
     transition: scale 0.2s ease-in-out;
 }
 
-#search-icon:hover {
-    scale: 1.1;
-}
-
 #date-time-box .clock-digit-container p {
     font-weight: 500;
     font-size: 12pt;
@@ -502,9 +493,6 @@ footer {
     transition: scale 0.2s ease-in-out;
 }
 
-#autocomplete-box h5:hover {
-    scale: 1.02;
-}
 
 /*info container*/
 #info-container {
@@ -701,10 +689,6 @@ footer {
     transition: scale 0.2s ease-in-out;
 }
 
-.hour-card:hover {
-    animation: none;
-    scale: 1.02;
-}
 
 @keyframes fade-in {
     from {
@@ -838,10 +822,6 @@ footer {
     animation-duration: 0.5s;
 }
 
-.forcast-card:hover {
-    scale: 1.02;
-}
-
 .forcast-card>div {
     display: flex;
     align-items: center;
@@ -879,6 +859,31 @@ footer {
 }
 
 /*today container, forcast-container/*/
+
+@media (pointer: fine) {
+
+    #location-on:hover,
+    #location-off:hover {
+        scale: 1.1;
+    }
+
+    #search-icon:hover {
+        scale: 1.1;
+    }
+
+    #autocomplete-box h5:hover {
+        scale: 1.02;
+    }
+
+    .hour-card:hover {
+        animation: none;
+        scale: 1.02;
+    }
+
+    .forcast-card:hover {
+        scale: 1.02;
+    }
+}
 
 @media screen and (max-width:790px) {
     :root {
