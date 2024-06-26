@@ -701,6 +701,7 @@ footer {
 }
 
 .hour-card:hover {
+    animation: none;
     scale: 1.02;
 }
 
@@ -896,6 +897,7 @@ footer {
     #today-container {
         order: 2;
         min-height: 9rem;
+        opacity: 1 !important;
     }
 
     .hour-card-container {
