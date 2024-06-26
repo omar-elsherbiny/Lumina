@@ -34,6 +34,7 @@ const moonset = document.querySelectorAll('#moonset .digit');
 const todayContainer = document.getElementById('today-container');
 const todayHourContainer = document.querySelector('#today-container .hour-card-container');
 const altCurrentContainer = document.getElementById('alt-current-container');
+const altHourContainer = document.querySelector('#alt-current-container .hour-card-container');
 
 async function getWeather(location) {
     try {
@@ -113,7 +114,7 @@ unitToggle.addEventListener('click', function () {
         setClock(currentTemp, tempToArr(wd.current[`temp_${targetUnit}`], targetUnit));
         setClock(feelsLike, tempToArr(wd.current[`feelslike_${targetUnit}`], targetUnit));
 
-        document.querySelectorAll('.hour-card-temp').forEach((temp, index) => {
+        document.querySelectorAll('#today-container .hour-card-temp').forEach((temp, index) => {
             let hour = wd.forecast.forecastday[0].hour[index];
             setClock(temp.querySelectorAll('.digit'), tempToArr(hour[`temp_${targetUnit}`], targetUnit));
         });
@@ -285,8 +286,7 @@ async function applyNewWeatherData(location) {
 
     if (!areObjectsDeepEqual(hourData, wd.forecast.forecastday[0].hour)) {
         hourData = wd.forecast.forecastday[0].hour;
-        todayHourContainer
-            .innerHTML = '';
+        todayHourContainer.innerHTML = '';
         hourData.forEach((hour, index) => {
             let element = document.createElement('div');
             element.classList.add('hour-card');
@@ -409,22 +409,17 @@ async function applyNewWeatherData(location) {
                     <h5 class="hour-card-snow">${hour.chance_of_snow}%</h5>
                 </div>
             </div>`
-            todayHourContainer
-                .appendChild(element);
+            todayHourContainer.appendChild(element);
             setClock(Array.from(element.querySelectorAll('.hour-card-temp .digit')), tempToArr(hour[`temp_${cu}`], cu));
             setClock(Array.from(element.querySelectorAll('.hour-card-val .digit')), [element.querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
         });
         let timeout = setTimeout(() => {
-            setClock(Array.from(todayHourContainer
-                .children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
-            setClock(Array.from(todayHourContainer
-                .children[0].querySelectorAll('.hour-card-val .digit')), [todayHourContainer
-                    .children[0].querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
+            setClock(Array.from(todayHourContainer.children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(hourData[0][`temp_${cu}`], cu));
+            setClock(Array.from(todayHourContainer.children[0].querySelectorAll('.hour-card-val .digit')), [todayHourContainer.children[0].querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
             clearTimeout(timeout);
         }, 500);
     }
-    todayHourContainer
-        .children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
+    todayHourContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
 }
 
 function confirmAutocomplete(searchIndex) {
@@ -580,22 +575,173 @@ function setMoon(moon_desc, moon_illum) {
 }
 // moon svg
 
+let setDayIndex = null;
 function onForcastClick(dayIndex) {
+    if (wd == null) return;
     let query = getComputedStyle(root).getPropertyValue('--media-query');
-    if (query == 0) {
-        if (currentContainer.style.transform == '') {
+    if (setDayIndex == dayIndex) {
+        if (query == 0) {
+            if (panelTransformed) {
+                currentContainer.style.transform = '';
+                todayContainer.style.transitionDelay = '1s';
+                todayContainer.style.opacity = '1';
+                altCurrentContainer.style.transitionDelay = '0s';
+                altCurrentContainer.style.opacity = '0';
+                panelTransformed = 0;
+            } else {
+                currentContainer.style.transform = 'translateX(100%)';
+                todayContainer.style.transitionDelay = '0s';
+                todayContainer.style.opacity = '0';
+                altCurrentContainer.style.transitionDelay = '1s';
+                altCurrentContainer.style.opacity = '1';
+                panelTransformed = 1;
+            }
+        }
+    } else {
+        if (query == 0) {
             currentContainer.style.transform = 'translateX(100%)';
             todayContainer.style.transitionDelay = '0s';
             todayContainer.style.opacity = '0';
             altCurrentContainer.style.transitionDelay = '1s';
             altCurrentContainer.style.opacity = '1';
-        } else {
-            currentContainer.style.transform = '';
-            todayContainer.style.transitionDelay = '1s';
-            todayContainer.style.opacity = '1';
-            altCurrentContainer.style.transitionDelay = '0s';
-            altCurrentContainer.style.opacity = '0';
+            panelTransformed = 1;
         }
+        setDayIndex = dayIndex;
+        let cu = document.documentElement.getAttribute('data-unit'); // current unit
+        let cf = document.documentElement.getAttribute('data-format'); // current time format
+        let tHourData = wd.forecast.forecastday[dayIndex].hour;
+        altHourContainer.innerHTML = '';
+        tHourData.forEach((hour, index) => {
+            let element = document.createElement('div');
+            element.classList.add('hour-card');
+            element.onclick = function () { this.classList.toggle("expanded") };
+            element.style.animation = `fade-in 0.3s ${index * 90}ms ease-in-out forwards`;
+            let timeout = setTimeout(() => {
+                element.style.animation = '';
+                element.style.opacity = '1';
+                clearTimeout(timeout);
+            }, index * 100 + 500);
+            element.style.backgroundColor = `var(--card-bgr-${hour.is_day ? 'day' : 'night'})`;
+            element.innerHTML = `
+                <div class="hour-card-main">
+                    <div class="hour-card-val clock-digit-container">
+                        <div class="digit">
+                            <p class="current">${index.toString().padStart(2, '0')}:00</p>
+                            <p>${index == 0 ? 12 : index}${index > 12 ? 'pm' : 'am'}</p>
+                        </div>
+                    </div>
+                    <div class="hour-card-temp clock-digit-container">
+                        <div class="digit">
+                            <p class="current">-</p>
+                            <p>0</p>
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                            <p>4</p>
+                            <p>5</p>
+                            <p>6</p>
+                            <p>7</p>
+                            <p>8</p>
+                            <p>9</p>
+                        </div>
+                        <div class="digit">
+                            <p class="current">-</p>
+                            <p>0</p>
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                            <p>4</p>
+                            <p>5</p>
+                            <p>6</p>
+                            <p>7</p>
+                            <p>8</p>
+                            <p>9</p>
+                        </div>
+                        <div class="digit">
+                            <p class="current">-</p>
+                            <p>0</p>
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                            <p>4</p>
+                            <p>5</p>
+                            <p>6</p>
+                            <p>7</p>
+                            <p>8</p>
+                            <p>9</p>
+                        </div>
+                        <p>.</p>
+                        <div class="digit">
+                            <p class="current">-</p>
+                            <p>0</p>
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                            <p>4</p>
+                            <p>5</p>
+                            <p>6</p>
+                            <p>7</p>
+                            <p>8</p>
+                            <p>9</p>
+                        </div>
+                        <div class="digit">
+                            <p class="current">-</p>
+                            <p>°C</p>
+                            <p>°F</p>
+                        </div>
+                    </div>
+                    <div class="hour-card-weather-icon">
+                        <img width="100%" height="100%"
+                            src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
+                    </div>
+                </div>
+                <div class="hour-card-extension">
+                    <div>
+                        <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke="url(#grad5)" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="1.5"
+                                d="M20.278 17.497c3.678-3.154-.214-7.384-4.256-7.384C13.175-.969-3.526 8.197 3.875 16.55" />
+                        </svg>
+                        <h5 class="hour-card-clouds">${hour.cloud}%</h5>
+                    </div>
+                    <div>
+                        <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke="url(#grad2)" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="1.5"
+                                d="M12.495 3c3.58 3.56 9.345 7.602 6.932 13.397C18.275 19.163 15.492 21 12.5 21c-2.992 0-5.775-1.837-6.927-4.603C3.161 10.607 8.919 6.561 12.495 3" />
+                        </svg>
+                        <h5 class="hour-card-humidity">${hour.humidity}%</h5>
+                    </div>
+                    <div>
+                        <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke="url(#grad6)" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="1.5"
+                                d="M12.004 19L12 14m4.004 7L16 16m-7.996 1L8 12m11.825 5c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                        </svg>
+                        <h5 class="hour-card-rain">${hour.chance_of_rain}%</h5>
+                    </div>
+                    <div>
+                        <svg class="hour-card-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                            viewBox="0 0 24 24">
+                            <path fill="none" stroke="url(#grad7)" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="1.5"
+                                d="M12.004 17.5L12 17m4.004-1.5L16 15m-7.996.5L8 15m4.004 6L12 20.5m4.004-1.5L16 18.5m-7.996.5L8 18.5M19.825 17c4.495-3.16.475-7.73-3.706-7.73C13.296-1.732-3.265 7.368 4.074 15.662" />
+                        </svg>
+                        <h5 class="hour-card-snow">${hour.chance_of_snow}%</h5>
+                    </div>
+                </div>`
+            altHourContainer.appendChild(element);
+            setClock(Array.from(element.querySelectorAll('.hour-card-temp .digit')), tempToArr(hour[`temp_${cu}`], cu));
+            setClock(Array.from(element.querySelectorAll('.hour-card-val .digit')), [element.querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
+        });
+        let timeout = setTimeout(() => {
+            setClock(Array.from(altHourContainer.children[0].querySelectorAll('.hour-card-temp .digit')), tempToArr(tHourData[0][`temp_${cu}`], cu));
+            setClock(Array.from(altHourContainer.children[0].querySelectorAll('.hour-card-val .digit')), [altHourContainer.children[0].querySelectorAll('.hour-card-val .digit p')[cf == '24' ? 0 : 1].textContent]);
+            clearTimeout(timeout);
+        }, 500);
     }
 }
 

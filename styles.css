@@ -676,7 +676,7 @@ footer {
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: start;
     flex-direction: column;
     mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.3rem, rgba(0, 0, 0, 1) calc(100% - 0.6rem), rgba(0, 0, 0, 0) 100%);
     -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0.3rem, rgba(0, 0, 0, 1) calc(100% - 0.6rem), rgba(0, 0, 0, 0) 100%);
@@ -809,6 +809,7 @@ footer {
 }
 
 #forcast-container>div {
+    justify-content: space-evenly;
     mask-image: none;
     -webkit-mask-image: none;
 }
