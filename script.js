@@ -433,7 +433,7 @@ async function applyNewWeatherData(location) {
     }
     todayHourContainer.children[parseInt(cTime.substring(0, 2))].style.outline = '3pt solid var(--card-day-outline)';
     let timeout = setTimeout(() => {
-        todayHourContainer.children[parseInt(cTime.substring(0, 2))].scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        todayHourContainer.children[parseInt(cTime.substring(0, 2))].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
         clearTimeout(timeout);
     }, 24 * 90)
 
@@ -839,8 +839,13 @@ function onForcastClick(dayIndex, animate = true) {
             panelTransformed = 1;
         }
     }
+    Array.from(forcastContainer.children).forEach(child => {
+        child.style.outline = 'none';
+    });
+    if (panelTransformed || query != 0) {
+        Array.from(forcastContainer.children)[dayIndex - 1].style.outline = '3pt solid var(--card-day-outline)';
+    }
     if (setDayIndex != dayIndex || !animate) {
-
         setDayIndex = dayIndex;
         let cu = document.documentElement.getAttribute('data-unit'); // current unit
         let cf = document.documentElement.getAttribute('data-format'); // current time format

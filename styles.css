@@ -943,14 +943,12 @@ footer {
 
     main {
         overflow-y: scroll;
-        scroll-snap-type: y proximity;
         padding: 0;
         justify-content: start;
         flex-direction: column;
     }
 
     section {
-        scroll-snap-align: center;
         min-width: 100%;
         min-height: 100%;
     }
