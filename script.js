@@ -245,7 +245,7 @@ async function applyNewWeatherData(location) {
     wd = await getWeather(location);
     let cu = document.documentElement.getAttribute('data-unit'); // current unit
     let cf = document.documentElement.getAttribute('data-format'); // current time format
-    console.log(wd);
+    // console.log(wd);
 
     let [cDate, cTime] = wd.location.localtime.split(' ');
     setClock(time, timeToArr(cTime, cf));
@@ -379,7 +379,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="hour-card-weather-icon">
-                    <img width="100%" height="100%"
+                    <img class="prevent-select" width="100%" height="100%"
                         src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
                 </div>
             </div>
@@ -505,7 +505,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="forcast-card-weather-icon">
-                    <img width="100%" height="100%"
+                    <img class="prevent-select" class="prevent-select" width="100%" height="100%"
                         src="https:${tomorrowData.day.condition.icon}"
                         alt="Forcast Weather Icon"></img>
                 </div>
@@ -604,7 +604,7 @@ async function applyNewWeatherData(location) {
                     </div>
                 </div>
                 <div class="forcast-card-weather-icon">
-                    <img width="100%" height="100%"
+                    <img class="prevent-select" width="100%" height="100%"
                         src="https:${afterTomorrowData.day.condition.icon}"
                         alt="Forcast Weather Icon"></img>
                 </div>
@@ -795,7 +795,7 @@ function setMoon(moon_desc, moon_illum) {
     if (moon_desc == 'Waxing Gibbous') ind = 2 + Math.round(0.1 * moon_illum + 1);
     if (moon_desc == 'Full Moon') ind = 14;
     if (moon_desc == 'Waning Gibbous') ind = 26 - Math.round(0.1 * moon_illum + 1);
-    if (moon_desc == 'Third Quarter') ind = 21;
+    if (moon_desc == 'Last Quarter') ind = 21;
     if (moon_desc == 'Waning Crescent') ind = 28 - Math.round(0.1 * moon_illum + 1);
 
     nightMoonIcon.forEach(svg => {
@@ -931,7 +931,7 @@ function onForcastClick(dayIndex, animate = true) {
                         </div>
                     </div>
                     <div class="hour-card-weather-icon">
-                        <img width="100%" height="100%"
+                        <img class="prevent-select" width="100%" height="100%"
                             src="https:${hour.condition.icon}" alt="Hour Weather Icon"></img>
                     </div>
                 </div>
